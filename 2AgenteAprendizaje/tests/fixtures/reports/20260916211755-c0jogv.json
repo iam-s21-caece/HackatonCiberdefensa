@@ -1,0 +1,663 @@
+{
+ "report_id": "20260916211755-c0jogv",
+ "recibido_en": "2026-09-16T21:17:55.887Z",
+ "origen_entrada": "eml_crudo",
+ "notas_parser": [],
+ "config": {
+  "vt_api_key": "",
+  "abuseipdb_api_key": "",
+  "abusech_api_key": "",
+  "ollama_url": "http://ollama:11434",
+  "ollama_model": "llama3.2:3b",
+  "dominios_propios": [
+   "ejercito.mil.ar",
+   "argentina.gob.ar",
+   "mil.ar"
+  ],
+  "soc_webhook_url": ""
+ },
+ "correo": {
+  "de": {
+   "raw": "\"Mercado Pago\" <avisos@avisos-mercadopago.online>",
+   "nombre": "Mercado Pago",
+   "direccion": "avisos@avisos-mercadopago.online",
+   "dominio": "avisos-mercadopago.online",
+   "dominio_registrable": "avisos-mercadopago.online"
+  },
+  "reply_to": {
+   "raw": "reembolsos.mp@yandex.com",
+   "nombre": "",
+   "direccion": "reembolsos.mp@yandex.com",
+   "dominio": "yandex.com",
+   "dominio_registrable": "yandex.com"
+  },
+  "return_path": {
+   "raw": "<avisos@avisos-mercadopago.online>",
+   "nombre": "",
+   "direccion": "avisos@avisos-mercadopago.online",
+   "dominio": "avisos-mercadopago.online",
+   "dominio_registrable": "avisos-mercadopago.online"
+  },
+  "para": "<cabo.ruiz@ejercito.mil.ar>",
+  "asunto": "Último aviso: tu reintegro de $45.900 vence hoy",
+  "fecha": "Thu, 17 Sep 2026 08:15:00 -0300",
+  "message_id": "<20260917081500.5120@srv-01.local>",
+  "auth": {
+   "spf": "softfail",
+   "dkim": "ausente",
+   "dmarc": "ausente",
+   "dkim_dominio": null
+  },
+  "saltos": 1,
+  "cuerpo_muestra": "Hola, tu reintegro de $45.900 sigue pendiente y vence hoy.\n Validá tu identidad con usuario y contraseña para recibirlo:\n https://www.mercadopago.com.ar/reintegros"
+ },
+ "artefactos": {
+  "ips": [
+   "198.51.100.23"
+  ],
+  "dominios": [
+   "avisos-mercadopago.online",
+   "yandex.com",
+   "mercadopago-reembolsos.click",
+   "mercadopago.com.ar"
+  ],
+  "urls": [
+   {
+    "url": "http://mercadopago-reembolsos.click/validar?id=88213",
+    "host": "mercadopago-reembolsos.click",
+    "dominio": "mercadopago-reembolsos.click",
+    "es_ip": false,
+    "texto_ancla": "https://www.mercadopago.com.ar/reintegros"
+   },
+   {
+    "url": "https://www.mercadopago.com.ar/reintegros",
+    "host": "www.mercadopago.com.ar",
+    "dominio": "mercadopago.com.ar",
+    "es_ip": false,
+    "texto_ancla": ""
+   }
+  ],
+  "adjuntos": [],
+  "hashes": []
+ },
+ "iocs_defanged": {
+  "remitente": "avisos@avisos-mercadopago[.]online",
+  "reply_to": "reembolsos[.]mp@yandex[.]com",
+  "ips": [
+   "198[.]51[.]100[.]23"
+  ],
+  "dominios": [
+   "avisos-mercadopago[.]online",
+   "yandex[.]com",
+   "mercadopago-reembolsos[.]click",
+   "mercadopago[.]com[.]ar"
+  ],
+  "urls": [
+   "hxxp://mercadopago-reembolsos[.]click/validar?id=88213",
+   "hxxps://www[.]mercadopago[.]com[.]ar/reintegros"
+  ],
+  "adjuntos": []
+ },
+ "score": 100,
+ "nivel": "CRITICO",
+ "veredicto_reglas": "VERDADERO_POSITIVO",
+ "reglas_duras": [
+  "remitente_inexistente"
+ ],
+ "score_por_categoria": {
+  "dns": 34,
+  "autenticacion": 26,
+  "url": 31,
+  "identidad": 26,
+  "ingenieria_social": 29,
+  "lookalike": 27,
+  "cabeceras": 15,
+  "infraestructura": 14
+ },
+ "hallazgos": [
+  {
+   "categoria": "dns",
+   "tipo": "dominio_inexistente",
+   "valor": "avisos-mercadopago.online",
+   "severidad": "critica",
+   "peso": 30,
+   "detalle": "El dominio remitente no existe en DNS (NXDOMAIN): dirección falsa",
+   "fuente": "dns"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "spf_fail",
+   "valor": "softfail",
+   "severidad": "alta",
+   "peso": 20,
+   "detalle": "SPF softfail: el servidor emisor NO está autorizado por el dominio avisos-mercadopago.online",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "url",
+   "tipo": "ancla_enganosa",
+   "valor": "\"https://www.mercadopago.com.ar/reintegros\" -> http://mercadopago-reembolsos.click/validar?id=88213",
+   "severidad": "alta",
+   "peso": 20,
+   "detalle": "El texto del enlace muestra www.mercadopago.com.ar pero apunta a mercadopago-reembolsos.click",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "identidad",
+   "tipo": "reply_to_distinto",
+   "valor": "reembolsos.mp@yandex.com",
+   "severidad": "alta",
+   "peso": 18,
+   "detalle": "Reply-To (yandex.com) difiere del From (avisos-mercadopago.online): las respuestas van a otro lado",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_credenciales",
+   "valor": "contraseña, usuario y contraseña",
+   "severidad": "alta",
+   "peso": 16,
+   "detalle": "Lenguaje de credenciales (2 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "lookalike",
+   "tipo": "marca_en_dominio",
+   "valor": "avisos-mercadopago.online",
+   "severidad": "alta",
+   "peso": 16,
+   "detalle": "remitente: el dominio incluye la marca \"mercadopago\" sin ser el oficial",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "lookalike",
+   "tipo": "marca_en_dominio",
+   "valor": "mercadopago-reembolsos.click",
+   "severidad": "alta",
+   "peso": 16,
+   "detalle": "enlace: el dominio incluye la marca \"mercadopago\" sin ser el oficial",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "identidad",
+   "tipo": "reply_to_freemail",
+   "valor": "reembolsos.mp@yandex.com",
+   "severidad": "alta",
+   "peso": 12,
+   "detalle": "Reply-To en cuenta gratuita (yandex.com): el atacante recibe las respuestas fuera de la organización",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "combo_credenciales_urgencia",
+   "valor": "",
+   "severidad": "alta",
+   "peso": 12,
+   "detalle": "Pide credenciales/verificación bajo presión de tiempo: patrón clásico de phishing",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_urgencia",
+   "valor": "último aviso, vence hoy",
+   "severidad": "media",
+   "peso": 10,
+   "detalle": "Lenguaje de urgencia (2 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "x_mailer_scripting",
+   "valor": "PHPMailer 6.8.0",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "Cliente de envío automatizado/masivo",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "url",
+   "tipo": "tld_sospechoso",
+   "valor": "http://mercadopago-reembolsos.click/validar?id=88213",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "TLD .click con alta tasa de abuso",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "url",
+   "tipo": "palabras_phishing_en_url",
+   "valor": "http://mercadopago-reembolsos.click/validar?id=88213",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "Palabras típicas de captura de credenciales en la URL",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "infraestructura",
+   "tipo": "dominio_sin_registro",
+   "valor": "avisos-mercadopago.online",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "El dominio no aparece registrado (o su TLD no publica RDAP)",
+   "fuente": "rdap"
+  },
+  {
+   "categoria": "infraestructura",
+   "tipo": "dominio_sin_registro",
+   "valor": "mercadopago-reembolsos.click",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "El dominio no aparece registrado (o su TLD no publica RDAP)",
+   "fuente": "rdap"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dkim_ausente",
+   "valor": "ausente",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "El mensaje no está firmado con DKIM",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "fecha_futura",
+   "valor": "Thu, 17 Sep 2026 08:15:00 -0300",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "Fecha del mensaje en el futuro",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "dns",
+   "tipo": "enlace_no_resuelve",
+   "valor": "mercadopago-reembolsos.click",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "Dominio del enlace no resuelve (campaña desmontada o aún no activa)",
+   "fuente": "dns"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "message_id_dominio_distinto",
+   "valor": "<20260917081500.5120@srv-01.local>",
+   "severidad": "baja",
+   "peso": 5,
+   "detalle": "Message-ID generado en srv-01.local, no en el dominio del From",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dmarc_ausente",
+   "valor": "ausente",
+   "severidad": "baja",
+   "peso": 4,
+   "detalle": "Sin evaluación DMARC",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "url",
+   "tipo": "http_sin_tls",
+   "valor": "http://mercadopago-reembolsos.click/validar?id=88213",
+   "severidad": "baja",
+   "peso": 3,
+   "detalle": "Enlace sin HTTPS",
+   "fuente": "heuristicas"
+  }
+ ],
+ "n_hallazgos": 21,
+ "fuentes": {
+  "cabeceras": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "spf": "softfail",
+    "dkim": "ausente",
+    "dmarc": "ausente",
+    "dkim_dominio": null,
+    "from": "avisos@avisos-mercadopago.online",
+    "reply_to": "reembolsos.mp@yandex.com",
+    "return_path": "avisos@avisos-mercadopago.online",
+    "saltos": 1,
+    "ips_en_cadena": [
+     "198.51.100.23"
+    ],
+    "x_mailer": "PHPMailer 6.8.0",
+    "freemail": false
+   }
+  },
+  "heuristicas": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "palabras_clave": {
+     "urgencia": [
+      "último aviso",
+      "vence hoy"
+     ],
+     "credenciales": [
+      "contraseña",
+      "usuario y contraseña"
+     ]
+    },
+    "urls_analizadas": 2,
+    "urls_externas": 2,
+    "adjuntos_analizados": 0,
+    "dominios_remitente": [
+     "avisos-mercadopago.online",
+     "yandex.com"
+    ],
+    "dominios_enlaces": [
+     "mercadopago-reembolsos.click",
+     "mercadopago.com.ar"
+    ],
+    "html": true
+   }
+  },
+  "virustotal": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí VT_API_KEY (gratis en virustotal.com) para habilitar esta fuente",
+   "resultados": {
+    "ips": {},
+    "dominios": {},
+    "urls": {},
+    "hashes": {},
+    "errores": []
+   }
+  },
+  "abuseipdb": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSEIPDB_API_KEY (gratis, 1000 checks/día) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "crtsh": {
+   "estado": "ok",
+   "consultas": 3,
+   "resultados": {
+    "avisos-mercadopago.online": {
+     "estado": "error",
+     "http": 502
+    },
+    "mercadopago-reembolsos.click": {
+     "estado": "error",
+     "http": 502
+    },
+    "mercadopago.com.ar": {
+     "estado": "timeout",
+     "http": 0
+    }
+   }
+  },
+  "rdap": {
+   "estado": "ok",
+   "consultas": 3,
+   "resultados": {
+    "avisos-mercadopago.online": {
+     "estado": "no_registrado_o_sin_rdap"
+    },
+    "mercadopago-reembolsos.click": {
+     "estado": "no_registrado_o_sin_rdap"
+    },
+    "mercadopago.com.ar": {
+     "estado": "ok",
+     "registrado": "2003-07-22T00:00:00+00:00",
+     "dias_desde_registro": 8458,
+     "expira": "2027-07-22T09:00:00+00:00",
+     "dias_hasta_expirar": 308,
+     "ultimo_cambio": "2018-08-23T18:31:35+00:00",
+     "estados": [
+      "active"
+     ],
+     "registrador": "nicar",
+     "nameservers": [
+      "ns-1064.awsdns-05.org",
+      "ns-1727.awsdns-23.co.uk",
+      "ns-632.awsdns-15.net",
+      "ns-78.awsdns-09.com"
+     ]
+    }
+   }
+  },
+  "urlhaus": {
+   "estado": "sin_api_key",
+   "consultas": 5,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch)",
+   "resultados": {
+    "urls": {
+     "http://mercadopago-reembolsos.click/validar?id=88213": {
+      "estado": "error",
+      "http": 401
+     },
+     "https://www.mercadopago.com.ar/reintegros": {
+      "estado": "error",
+      "http": 401
+     }
+    },
+    "hosts": {
+     "mercadopago-reembolsos.click": {
+      "estado": "error",
+      "http": 401
+     },
+     "www.mercadopago.com.ar": {
+      "estado": "error",
+      "http": 401
+     },
+     "198.51.100.23": {
+      "estado": "error",
+      "http": 401
+     }
+    }
+   }
+  },
+  "malwarebazaar": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "threatfox": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "dns": {
+   "estado": "ok",
+   "consultas": 6,
+   "resultados": {
+    "avisos-mercadopago.online": {
+     "rol": "remitente",
+     "existe": false,
+     "mx": [],
+     "spf": null,
+     "dmarc": null,
+     "politica_dmarc": null,
+     "a": []
+    },
+    "mercadopago-reembolsos.click": {
+     "rol": "enlace",
+     "existe": false,
+     "a": []
+    },
+    "mercadopago.com.ar": {
+     "rol": "enlace",
+     "existe": true,
+     "a": [
+      "65.8.207.73",
+      "65.8.207.127",
+      "65.8.207.111",
+      "65.8.207.88"
+     ]
+    }
+   }
+  },
+  "agente_identidad": {
+   "estado": "ok",
+   "consultas": 2,
+   "nota": null,
+   "resultados": {
+    "analisis_id": "a1-b2422fdc6255",
+    "version": "1.0.0",
+    "objetivo_cumplido": true,
+    "conclusion": "NO_VERIFICABLE",
+    "motivo_conclusion": "avisos-mercadopago.online no publica DMARC",
+    "remitente": "avisos@avisos-mercadopago.online",
+    "dominio_propio": false,
+    "origen": {
+     "ip": "198.51.100.23",
+     "mx": "mx4.ejercito.mil.ar",
+     "confiable": true,
+     "motivo": "IP que entregó el correo a mx4.ejercito.mil.ar",
+     "indice_received": 0
+    },
+    "autenticacion_declarada": {
+     "spf": "softfail",
+     "dkim": "ausente",
+     "dmarc": "ausente",
+     "dkim_dominio": null
+    },
+    "authentication_results": [
+     {
+      "authserv_id": "mx4.ejercito.mil.ar",
+      "spf": "softfail",
+      "dkim": null,
+      "dmarc": null,
+      "confiable": true
+     }
+    ],
+    "spf_recalculado": {
+     "resultado": "none",
+     "dominio": "avisos-mercadopago.online",
+     "ip": "198.51.100.23",
+     "registro": null,
+     "mecanismo": null,
+     "consultas": 0,
+     "detalle": "",
+     "notas": []
+    },
+    "dkim_verificado": [],
+    "politica_dmarc": null,
+    "dmarc_recalculado": {
+     "resultado": "none",
+     "politica": null,
+     "alineacion_spf": false,
+     "alineacion_dkim": false,
+     "detalle": "avisos-mercadopago.online no publica DMARC"
+    },
+    "relacion": {
+     "primer_contacto": true,
+     "contactos_previos": 0
+    },
+    "bec": {
+     "autoridad": [],
+     "cbu": [],
+     "cvu": [],
+     "alias": [],
+     "montos": [
+      "$45.900"
+     ],
+     "transferencia": false,
+     "urgencia_secreto": [],
+     "destinos_hash": [],
+     "instruccion_pago": false
+    },
+    "degradado": [],
+    "pasos": [
+     {
+      "n": 1,
+      "accion": "identificar_origen",
+      "ms": 0.1
+     },
+     {
+      "n": 2,
+      "accion": "consultar_politica_dmarc",
+      "ms": 0
+     },
+     {
+      "n": 3,
+      "accion": "recalcular_spf",
+      "ms": 0
+     },
+     {
+      "n": 4,
+      "accion": "evaluar_dmarc",
+      "ms": 0
+     },
+     {
+      "n": 5,
+      "accion": "concluir_identidad",
+      "ms": 0
+     },
+     {
+      "n": 6,
+      "accion": "consultar_relacion",
+      "ms": 0
+     },
+     {
+      "n": 7,
+      "accion": "evaluar_patron_bec",
+      "ms": 0.2
+     }
+    ],
+    "duracion_ms": 0.5
+   }
+  }
+ },
+ "fuentes_ok": [
+  "cabeceras",
+  "heuristicas",
+  "crtsh",
+  "rdap",
+  "dns",
+  "agente_identidad"
+ ],
+ "fuentes_sin_key": [
+  "virustotal",
+  "abuseipdb",
+  "urlhaus",
+  "threatfox"
+ ],
+ "fuentes_error": [],
+ "ia": {
+  "disponible": true,
+  "modelo": "llama3.2:3b",
+  "error": null,
+  "veredicto": "FALSO_POSITIVO",
+  "confianza": 0.85,
+  "tipo_amenaza": "legitimo",
+  "resumen": "[IA simulada por el harness: legitimo]",
+  "indicadores_clave": [],
+  "acciones_recomendadas": [],
+  "mitre_attack": [],
+  "mensaje_para_usuario": null,
+  "duracion_ms": 118000
+ },
+ "veredicto_final": "ESCALAR",
+ "accion": "COLA_INVESTIGADOR",
+ "motivo_veredicto": [
+  "Regla dura activada (remitente_inexistente): la IA no puede degradar evidencia confirmada",
+  "La IA dijo FALSO_POSITIVO pero el score determinístico es 100: desacuerdo -> revisa un humano"
+ ],
+ "resumen_ejecutivo": {
+  "report_id": "20260916211755-c0jogv",
+  "veredicto": "ESCALAR",
+  "accion": "COLA_INVESTIGADOR",
+  "score": 100,
+  "nivel": "CRITICO",
+  "de": "avisos@avisos-mercadopago.online",
+  "asunto": "Último aviso: tu reintegro de $45.900 vence hoy",
+  "hallazgos_criticos_altos": 9,
+  "ia_resumen": "[IA simulada por el harness: legitimo]",
+  "ia_confianza": 0.85,
+  "mitre": [],
+  "fuentes_ok": [
+   "cabeceras",
+   "heuristicas",
+   "crtsh",
+   "rdap",
+   "dns",
+   "agente_identidad"
+  ]
+ }
+}

@@ -1,0 +1,254 @@
+{
+ "20260916211156-r25end": {
+  "muestra": "bec_autenticacion_forjada",
+  "flujo": "original",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211157-q75qul": {
+  "muestra": "bec_autenticacion_forjada",
+  "flujo": "original",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211158-ke5vav": {
+  "muestra": "bec_autenticacion_forjada",
+  "flujo": "original",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211159-6fxt9j": {
+  "muestra": "bec_autenticacion_forjada",
+  "flujo": "con_agente1",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211159-o0mtqt": {
+  "muestra": "bec_autenticacion_forjada",
+  "flujo": "con_agente1",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211200-bnzp5l": {
+  "muestra": "bec_autenticacion_forjada",
+  "flujo": "con_agente1",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211201-nguifi": {
+  "muestra": "bec_suplantacion_interna",
+  "flujo": "original",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211202-x3tkau": {
+  "muestra": "bec_suplantacion_interna",
+  "flujo": "original",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211203-4o8umz": {
+  "muestra": "bec_suplantacion_interna",
+  "flujo": "original",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211204-v71ey1": {
+  "muestra": "bec_suplantacion_interna",
+  "flujo": "con_agente1",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211205-s9czff": {
+  "muestra": "bec_suplantacion_interna",
+  "flujo": "con_agente1",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211206-3pn176": {
+  "muestra": "bec_suplantacion_interna",
+  "flujo": "con_agente1",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211207-p86pfi": {
+  "muestra": "phishing_reembolso",
+  "flujo": "original",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211309-x3vfz4": {
+  "muestra": "phishing_reembolso",
+  "flujo": "original",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211352-rubwqu": {
+  "muestra": "phishing_reembolso",
+  "flujo": "original",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211404-la8bdo": {
+  "muestra": "phishing_reembolso",
+  "flujo": "con_agente1",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211419-02mzz6": {
+  "muestra": "phishing_reembolso",
+  "flujo": "con_agente1",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211451-c1voqb": {
+  "muestra": "phishing_reembolso",
+  "flujo": "con_agente1",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211600-y24smy": {
+  "muestra": "interno_legitimo",
+  "flujo": "original",
+  "ia": "coincide",
+  "verdad": "LEGITIMO"
+ },
+ "20260916211601-yfndu3": {
+  "muestra": "interno_legitimo",
+  "flujo": "original",
+  "ia": "legitimo",
+  "verdad": "LEGITIMO"
+ },
+ "20260916211603-suid8l": {
+  "muestra": "interno_legitimo",
+  "flujo": "original",
+  "ia": "caida",
+  "verdad": "LEGITIMO"
+ },
+ "20260916211604-3lybc1": {
+  "muestra": "interno_legitimo",
+  "flujo": "con_agente1",
+  "ia": "coincide",
+  "verdad": "LEGITIMO"
+ },
+ "20260916211605-t8594u": {
+  "muestra": "interno_legitimo",
+  "flujo": "con_agente1",
+  "ia": "legitimo",
+  "verdad": "LEGITIMO"
+ },
+ "20260916211606-6xq6u4": {
+  "muestra": "interno_legitimo",
+  "flujo": "con_agente1",
+  "ia": "caida",
+  "verdad": "LEGITIMO"
+ },
+ "20260916211607-wkfxk2": {
+  "muestra": "phishing_reembolso_campana2",
+  "flujo": "original",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211625-hwbbu7": {
+  "muestra": "phishing_reembolso_campana2",
+  "flujo": "original",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211629-iq2fu1": {
+  "muestra": "phishing_reembolso_campana2",
+  "flujo": "original",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211712-z31ivf": {
+  "muestra": "phishing_reembolso_campana2",
+  "flujo": "con_agente1",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211755-c0jogv": {
+  "muestra": "phishing_reembolso_campana2",
+  "flujo": "con_agente1",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211831-i297x1": {
+  "muestra": "phishing_reembolso_campana2",
+  "flujo": "con_agente1",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211859-xocipl": {
+  "muestra": "bec_transferencia_campana2",
+  "flujo": "original",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211900-k20adn": {
+  "muestra": "bec_transferencia_campana2",
+  "flujo": "original",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211901-ap6257": {
+  "muestra": "bec_transferencia_campana2",
+  "flujo": "original",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211902-oodzwb": {
+  "muestra": "bec_transferencia_campana2",
+  "flujo": "con_agente1",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211903-msc9ad": {
+  "muestra": "bec_transferencia_campana2",
+  "flujo": "con_agente1",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211904-dfewxb": {
+  "muestra": "bec_transferencia_campana2",
+  "flujo": "con_agente1",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211904-roc5m5": {
+  "muestra": "phishing_m365_credenciales",
+  "flujo": "original",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916211953-hbecng": {
+  "muestra": "phishing_m365_credenciales",
+  "flujo": "original",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916212020-dpzi2i": {
+  "muestra": "phishing_m365_credenciales",
+  "flujo": "original",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ },
+ "20260916212055-grsj4w": {
+  "muestra": "phishing_m365_credenciales",
+  "flujo": "con_agente1",
+  "ia": "coincide",
+  "verdad": "MALICIOSO"
+ },
+ "20260916212134-z703qb": {
+  "muestra": "phishing_m365_credenciales",
+  "flujo": "con_agente1",
+  "ia": "legitimo",
+  "verdad": "MALICIOSO"
+ },
+ "20260916212206-985tt2": {
+  "muestra": "phishing_m365_credenciales",
+  "flujo": "con_agente1",
+  "ia": "caida",
+  "verdad": "MALICIOSO"
+ }
+}

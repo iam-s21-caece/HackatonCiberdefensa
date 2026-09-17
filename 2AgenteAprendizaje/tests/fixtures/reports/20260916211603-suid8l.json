@@ -1,0 +1,306 @@
+{
+ "report_id": "20260916211603-suid8l",
+ "recibido_en": "2026-09-16T21:16:03.398Z",
+ "origen_entrada": "eml_crudo",
+ "notas_parser": [],
+ "config": {
+  "vt_api_key": "",
+  "abuseipdb_api_key": "",
+  "abusech_api_key": "",
+  "ollama_url": "http://ollama:11434",
+  "ollama_model": "llama3.2:3b",
+  "dominios_propios": [
+   "ejercito.mil.ar",
+   "argentina.gob.ar",
+   "mil.ar"
+  ],
+  "soc_webhook_url": ""
+ },
+ "correo": {
+  "de": {
+   "raw": "\"Comunicaciones Institucionales\" <comunicaciones@ejercito.mil.ar>",
+   "nombre": "Comunicaciones Institucionales",
+   "direccion": "comunicaciones@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "reply_to": {
+   "raw": "",
+   "nombre": "",
+   "direccion": "",
+   "dominio": "",
+   "dominio_registrable": ""
+  },
+  "return_path": {
+   "raw": "<comunicaciones@ejercito.mil.ar>",
+   "nombre": "",
+   "direccion": "comunicaciones@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "para": "<personal@ejercito.mil.ar>",
+  "asunto": "Boletín interno semanal",
+  "fecha": "Wed, 16 Sep 2026 08:30:00 -0300",
+  "message_id": "<boletin-2026-37@ejercito.mil.ar>",
+  "auth": {
+   "spf": "pass",
+   "dkim": "ausente",
+   "dmarc": "pass",
+   "dkim_dominio": null
+  },
+  "saltos": 1,
+  "cuerpo_muestra": "Estimado personal:\nCompartimos las novedades de la semana: cronograma de capacitaciones, actualización del reglamento de licencias y recordatorio del acto del 20 de septiembre.\nSaludos cordiales.\nComunicación Institucional"
+ },
+ "artefactos": {
+  "ips": [
+   "179.51.212.118"
+  ],
+  "dominios": [
+   "ejercito.mil.ar"
+  ],
+  "urls": [],
+  "adjuntos": [],
+  "hashes": []
+ },
+ "iocs_defanged": {
+  "remitente": "comunicaciones@ejercito[.]mil[.]ar",
+  "reply_to": null,
+  "ips": [
+   "179[.]51[.]212[.]118"
+  ],
+  "dominios": [
+   "ejercito[.]mil[.]ar"
+  ],
+  "urls": [],
+  "adjuntos": []
+ },
+ "score": 2,
+ "nivel": "BAJO",
+ "veredicto_reglas": "FALSO_POSITIVO",
+ "reglas_duras": [],
+ "score_por_categoria": {
+  "ingenieria_social": 12,
+  "autenticacion": 6,
+  "contexto": -10,
+  "dns": -6
+ },
+ "hallazgos": [
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_amenaza",
+   "valor": "citacion",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "Lenguaje de amenaza (1 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dkim_ausente",
+   "valor": "ausente",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "El mensaje no está firmado con DKIM",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_institucional",
+   "valor": "licencia",
+   "severidad": "baja",
+   "peso": 6,
+   "detalle": "Lenguaje de institucional (1 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "contexto",
+   "tipo": "sin_vector",
+   "valor": "",
+   "severidad": "info",
+   "peso": -10,
+   "detalle": "Sin enlaces ni adjuntos ni pedido de datos: sin vector de ataque evidente",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "dns",
+   "tipo": "dominio_bien_protegido",
+   "valor": "ejercito.mil.ar",
+   "severidad": "info",
+   "peso": -6,
+   "detalle": "Dominio con SPF + DMARC reject y SPF pass: difícil de suplantar",
+   "fuente": "dns"
+  },
+  {
+   "categoria": "dns",
+   "tipo": "dominio_propio_protegido",
+   "valor": "ejercito.mil.ar",
+   "severidad": "info",
+   "peso": 0,
+   "detalle": "Dominio propio con SPF/DMARC publicados",
+   "fuente": "dns"
+  }
+ ],
+ "n_hallazgos": 6,
+ "fuentes": {
+  "cabeceras": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "spf": "pass",
+    "dkim": "ausente",
+    "dmarc": "pass",
+    "dkim_dominio": null,
+    "from": "comunicaciones@ejercito.mil.ar",
+    "reply_to": null,
+    "return_path": "comunicaciones@ejercito.mil.ar",
+    "saltos": 1,
+    "ips_en_cadena": [
+     "179.51.212.118"
+    ],
+    "x_mailer": null,
+    "freemail": false
+   }
+  },
+  "heuristicas": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "palabras_clave": {
+     "amenaza": [
+      "citacion"
+     ],
+     "institucional": [
+      "licencia"
+     ]
+    },
+    "urls_analizadas": 0,
+    "urls_externas": 0,
+    "adjuntos_analizados": 0,
+    "dominios_remitente": [
+     "ejercito.mil.ar"
+    ],
+    "dominios_enlaces": [],
+    "html": false
+   }
+  },
+  "virustotal": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí VT_API_KEY (gratis en virustotal.com) para habilitar esta fuente",
+   "resultados": {
+    "ips": {},
+    "dominios": {},
+    "urls": {},
+    "hashes": {},
+    "errores": []
+   }
+  },
+  "abuseipdb": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSEIPDB_API_KEY (gratis, 1000 checks/día) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "crtsh": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "rdap": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "urlhaus": {
+   "estado": "sin_api_key",
+   "consultas": 1,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch)",
+   "resultados": {
+    "urls": {},
+    "hosts": {
+     "179.51.212.118": {
+      "estado": "error",
+      "http": 401
+     }
+    }
+   }
+  },
+  "malwarebazaar": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "threatfox": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "dns": {
+   "estado": "ok",
+   "consultas": 4,
+   "resultados": {
+    "ejercito.mil.ar": {
+     "rol": "remitente",
+     "existe": true,
+     "mx": [
+      "7 mx4.ejercito.mil.ar."
+     ],
+     "spf": "v=spf1 a mx ip4:179.51.212.118 -all",
+     "dmarc": "v=DMARC1; p=reject; rua=mailto:secsistemas@ejercito.mil.ar; ruf=mailto:secsistemas@ejercito.mil.ar; pct=100; adkim=s; aspf=s",
+     "politica_dmarc": "reject",
+     "a": []
+    }
+   }
+  }
+ },
+ "fuentes_ok": [
+  "cabeceras",
+  "heuristicas",
+  "dns"
+ ],
+ "fuentes_sin_key": [
+  "virustotal",
+  "abuseipdb",
+  "urlhaus",
+  "threatfox"
+ ],
+ "fuentes_error": [],
+ "ia": {
+  "disponible": false,
+  "modelo": "llama3.2:3b",
+  "error": "connect ECONNREFUSED 127.0.0.1:11434",
+  "veredicto": null,
+  "confianza": null,
+  "tipo_amenaza": null,
+  "resumen": null,
+  "indicadores_clave": [],
+  "acciones_recomendadas": [],
+  "mitre_attack": [],
+  "mensaje_para_usuario": null,
+  "duracion_ms": null
+ },
+ "veredicto_final": "FALSO_POSITIVO",
+ "accion": "ENTREGAR",
+ "motivo_veredicto": [
+  "IA no disponible (connect ECONNREFUSED 127.0.0.1:11434): se usa el veredicto del motor de reglas"
+ ],
+ "resumen_ejecutivo": {
+  "report_id": "20260916211603-suid8l",
+  "veredicto": "FALSO_POSITIVO",
+  "accion": "ENTREGAR",
+  "score": 2,
+  "nivel": "BAJO",
+  "de": "comunicaciones@ejercito.mil.ar",
+  "asunto": "Boletín interno semanal",
+  "hallazgos_criticos_altos": 0,
+  "ia_resumen": null,
+  "ia_confianza": null,
+  "mitre": [],
+  "fuentes_ok": [
+   "cabeceras",
+   "heuristicas",
+   "dns"
+  ]
+ }
+}

@@ -1,0 +1,253 @@
+# =====================================================================================================
+#  CENTINELA · ecosistema completo — RNF-02, RNF-04
+#
+#  Un contenedor por pieza, todas en la red de este proyecto:
+#
+#    n8n-importar ─(una vez)─> n8n ──POST /analizar──> agente-identidad (Agente 1)
+#                               │  └─/api/chat──> ollama   <─(una vez)─ ollama-modelo
+#                               └─ escribe ./data/reports ──(solo lectura)──> agente-aprendizaje (Agente 2)
+#                                                                              agente-identidad (aprende)
+#    interfaz (nginx) ──/api──> agente-aprendizaje      ──/agente1/salud──> agente-identidad
+#
+#  Levantar:   bash scripts/levantar.sh       (o: docker compose up -d --build)
+#  Verificar:  bash scripts/verificar_e2e.sh  (corre las muestras y guarda evidencia)
+#  Detalle:    docs/DESPLIEGUE.md
+#
+#  Versiones FIJAS: son variables controladas del experimento. Cambiarlas es cambiar el experimento.
+#  Puertos publicados sólo en 127.0.0.1 por defecto (CENTINELA_BIND): los webhooks no tienen
+#  autenticación y el perfil de demo confía en lo que se sube (ver ORIGENES_CONFIABLES en .env.example).
+# =====================================================================================================
+name: centinela
+
+x-logs: &logs
+  driver: json-file
+  options: { max-size: "10m", max-file: "3" }
+
+x-imagen-n8n: &imagen-n8n docker.n8n.io/n8nio/n8n:${N8N_VERSION:-2.39.7}
+x-imagen-ollama: &imagen-ollama ollama/ollama:${OLLAMA_VERSION:-0.34.1}
+
+services:
+  # --------------------------------------------------------------------------------------------------
+  #  Flujo n8n (Pablo) · workflow/ es la fuente de verdad: se importa y publica en cada `up`
+  # --------------------------------------------------------------------------------------------------
+  n8n-importar:
+    image: *imagen-n8n
+    restart: "no"
+    # import:workflow siempre deja el flujo sin publicar; publish:workflow lo activa (n8n 2.x:
+    # update:workflow --active está deprecado). Corre ANTES de n8n: no hace falta reiniciarlo.
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >-
+        n8n import:workflow --input=/workflow/centinela_workflow.json &&
+        n8n publish:workflow --id=CentinelaPhish01
+    environment:
+      - GENERIC_TIMEZONE=America/Argentina/Buenos_Aires
+      - N8N_DIAGNOSTICS_ENABLED=false
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./workflow:/workflow:ro
+    logging: *logs
+
+  n8n:
+    image: *imagen-n8n
+    restart: unless-stopped
+    depends_on:
+      n8n-importar: { condition: service_completed_successfully }
+      # Sin depends_on de los agentes ni de Ollama a propósito (RG-04): si no responden, el flujo decide igual.
+    ports:
+      - "${CENTINELA_BIND:-127.0.0.1}:${N8N_PUERTO:-5678}:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - N8N_WEBHOOK_URL=http://localhost:${N8N_PUERTO:-5678}/
+      - GENERIC_TIMEZONE=America/Argentina/Buenos_Aires
+      - TZ=America/Argentina/Buenos_Aires
+      - N8N_SECURE_COOKIE=false
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_PERSONALIZATION_ENABLED=false
+      # Los nodos Code leen config vía $env y usan require('crypto') para hashear adjuntos
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      # Explícito: n8n anunció que bajará el valor por defecto a 60 s (ver `docker compose logs n8n`)
+      - N8N_RUNNERS_TASK_TIMEOUT=300
+      # n8n 2.x restringe el nodo Read/Write Files a ~/.n8n-files; habilitamos /data (reportes + bitácora)
+      - N8N_RESTRICT_FILE_ACCESS_TO=/data
+      # Usuario administrador creado desde el entorno (scripts/levantar.sh genera el hash bcrypt).
+      # Vacío = se crea a mano en http://localhost:5678 la primera vez.
+      - N8N_INSTANCE_OWNER_MANAGED_BY_ENV=${N8N_OWNER_DESDE_ENTORNO:-false}
+      - N8N_INSTANCE_OWNER_EMAIL=${N8N_OWNER_EMAIL:-}
+      - N8N_INSTANCE_OWNER_PASSWORD_HASH=${N8N_OWNER_PASSWORD_HASH:-}
+      - N8N_INSTANCE_OWNER_FIRST_NAME=Centinela
+      - N8N_INSTANCE_OWNER_LAST_NAME=Admin
+      # ---- configuración de CENTINELA (se leen desde .env) ----
+      - VT_API_KEY=${VT_API_KEY:-}
+      - ABUSEIPDB_API_KEY=${ABUSEIPDB_API_KEY:-}
+      - ABUSECH_API_KEY=${ABUSECH_API_KEY:-}
+      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.2:3b}
+      # IA externa opcional. auto = DeepSeek si hay key; si no, Ollama local
+      - IA_PROVEEDOR=${IA_PROVEEDOR:-auto}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY:-}
+      - DEEPSEEK_URL=${DEEPSEEK_URL:-https://api.deepseek.com}
+      - DEEPSEEK_MODEL=${DEEPSEEK_MODEL:-deepseek-chat}
+      - DOMINIOS_PROPIOS=${DOMINIOS_PROPIOS:-ejercito.mil.ar,argentina.gob.ar,mil.ar}
+      # Números/IDs institucionales de WhatsApp/SMS (E.164 o ID alfanumérico) y país propio (E.164)
+      - NUMEROS_PROPIOS=${NUMEROS_PROPIOS:-}
+      - PAIS_PROPIO=${PAIS_PROPIO:-54}
+      - SOC_WEBHOOK_URL=${SOC_WEBHOOK_URL:-}
+      # Agente 1 por la red del proyecto. Otro valor sólo si el agente corre fuera de este compose.
+      - AGENTE1_URL=${AGENTE1_URL:-http://agente-identidad:8101}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # sólo se usa si AGENTE1_URL apunta al host
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./data:/data
+      - ./workflow:/workflow:ro
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1:5678/healthz/readiness"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    security_opt: ["no-new-privileges:true"]
+    deploy:
+      resources:
+        limits: { memory: 2g }
+    logging: *logs
+
+  # --------------------------------------------------------------------------------------------------
+  #  IA local del flujo (decisor). Opcional: sin ella el motor de reglas decide (scripts/levantar.sh --sin-ia)
+  # --------------------------------------------------------------------------------------------------
+  ollama:
+    image: *imagen-ollama
+    restart: unless-stopped
+    ports:
+      - "${CENTINELA_BIND:-127.0.0.1}:${OLLAMA_PUERTO:-11434}:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    security_opt: ["no-new-privileges:true"]
+    logging: *logs
+    # Si tenés GPU NVIDIA, descomentá:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+  ollama-modelo:
+    image: *imagen-ollama
+    restart: "no"
+    depends_on:
+      ollama: { condition: service_healthy }
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    # Descarga el modelo una sola vez (queda en el volumen ollama_models). Si ya está, termina enseguida.
+    entrypoint: ["ollama", "pull"]
+    command: ["${OLLAMA_MODEL:-llama3.2:3b}"]
+    logging: *logs
+
+  # --------------------------------------------------------------------------------------------------
+  #  Agente 1 · identidad del remitente (basado en modelos + objetivos) — RA1
+  # --------------------------------------------------------------------------------------------------
+  agente-identidad:
+    build: ./1AgenteModelosObjetivos
+    image: centinela/agente-identidad:1.0.0
+    restart: unless-stopped
+    environment:
+      DOMINIOS_PROPIOS: ${AGENTE1_DOMINIOS_PROPIOS:-ejercito.mil.ar}
+      MX_CONFIABLES: ${MX_CONFIABLES:-}
+      AUTHSERV_CONFIABLES: ${AUTHSERV_CONFIABLES:-}
+      # imap = confiable. eml_crudo/json_estructurado sólo si quien sube al webhook es un componente propio.
+      ORIGENES_CONFIABLES: ${ORIGENES_CONFIABLES:-imap}
+      AGENTE1_DATA_DIR: /data/agente1
+      CENTINELA_REPORTES_DIR: /centinela/reports
+      AGENTE2_VEREDICTOS_PATH: /agente2/veredictos.jsonl
+    volumes:
+      - ${CENTINELA_REPORTES_DIR:-./data/reports}:/centinela/reports:ro
+      - agente1-datos:/data/agente1
+      - agente2-datos:/agente2:ro
+    ports:
+      - "${CENTINELA_BIND:-127.0.0.1}:${AGENTE1_PUERTO:-8101}:8101"
+    # healthcheck: definido en su Dockerfile (GET /salud)
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    deploy:
+      resources:
+        limits: { memory: 512m }
+    logging: *logs
+
+  # --------------------------------------------------------------------------------------------------
+  #  Agente 2 · aprendizaje y supervisión (de aprendizaje) — RA2. Sin salida de red (RG-05)
+  # --------------------------------------------------------------------------------------------------
+  agente-aprendizaje:
+    build: ./2AgenteAprendizaje
+    image: centinela/agente-aprendizaje:1.0.0
+    restart: unless-stopped
+    environment:
+      CENTINELA_REPORTES_DIR: /centinela/reports
+      AGENTE2_DATA_DIR: /data/agente2
+      AGENTE1_TRAZAS_DIR: /agente1/trazas
+      AGENTE2_TOKEN: ${AGENTE2_TOKEN:-}
+      CORS_ORIGENES: ${CORS_ORIGENES:-http://localhost:5173}
+      DOMINIOS_PROPIOS: ${DOMINIOS_PROPIOS:-ejercito.mil.ar,argentina.gob.ar,mil.ar}
+      UMBRAL_ESCALAR: ${UMBRAL_ESCALAR:-30}
+      UMBRAL_BLOQUEAR: ${UMBRAL_BLOQUEAR:-65}
+      MUESTRA_MINIMA: ${MUESTRA_MINIMA:-40}
+    volumes:
+      - ${CENTINELA_REPORTES_DIR:-./data/reports}:/centinela/reports:ro
+      - agente2-datos:/data/agente2
+      - agente1-datos:/agente1:ro
+    ports:
+      - "${CENTINELA_BIND:-127.0.0.1}:${AGENTE2_PUERTO:-8102}:8102"
+    # healthcheck: definido en su Dockerfile (GET /api/salud)
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    deploy:
+      resources:
+        limits: { memory: 512m }
+    logging: *logs
+
+  # --------------------------------------------------------------------------------------------------
+  #  Interfaz (RI-08): nginx sirve los estáticos y enruta /api -> Agente 2, /agente1/salud -> Agente 1
+  # --------------------------------------------------------------------------------------------------
+  interfaz:
+    build: ./interfaz
+    image: centinela/interfaz:0.1.0
+    restart: unless-stopped
+    environment:
+      AGENTE2_UPSTREAM: agente-aprendizaje:8102
+      AGENTE1_UPSTREAM: agente-identidad:8101
+    depends_on:
+      # nginx resuelve los upstream al arrancar: los contenedores tienen que existir (no hace falta que estén sanos)
+      agente-aprendizaje: { condition: service_started }
+      agente-identidad: { condition: service_started }
+    ports:
+      - "${CENTINELA_BIND:-127.0.0.1}:${INTERFAZ_PUERTO:-8088}:80"
+    # healthcheck: definido en su Dockerfile (GET /healthz)
+    security_opt: ["no-new-privileges:true"]
+    deploy:
+      resources:
+        limits: { memory: 128m }
+    logging: *logs
+
+# Volúmenes nombrados: cada agente escribe sólo el suyo y lee el del otro en solo lectura
+# (veredictos del Agente 2 -> modelo de relaciones del Agente 1; trazas del Agente 1 -> detalle del Agente 2).
+# Los reportes y la bitácora del flujo quedan en ./data (carpeta del repo) para poder inspeccionarlos.
+volumes:
+  n8n_data:
+  ollama_models:
+  agente1-datos:
+  agente2-datos:

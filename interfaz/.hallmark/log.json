@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-09-17",
+    "scope": "app",
+    "macrostructure": "Index-First (familia: Map/Diagram en Actores, Stat-Led en Métricas/Calibración/Aprendizaje)",
+    "theme": "custom",
+    "theme_axes": "light / display-condensed-bold / cool",
+    "vibe": "expediente técnico, sala de situación, verificable, soberano",
+    "nav": "N3 side-rail (izquierda, 17,5 rem, numerado)",
+    "footer": "Ft4 dense typographic",
+    "enrichment": "none",
+    "brief": "CENTINELA · panel del investigador · Hackatón Cyber.Ar 2026 · rediseño de la base heredada de pro-inves-frontend"
+  }
+]

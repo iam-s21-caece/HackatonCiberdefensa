@@ -1,0 +1,7 @@
+tests/
+integracion_n8n/
+data/
+.env
+__pycache__/
+*.pyc
+.pytest_cache/

@@ -1,0 +1,6 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "integracion_n8n"]
+addopts = "-q -p no:cacheprovider"
+markers = ["integracion: ejecuta el workflow real con Node.js (lento, usa red)"]
+filterwarnings = ["ignore::DeprecationWarning"]

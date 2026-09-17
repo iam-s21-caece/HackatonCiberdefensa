@@ -1,0 +1,442 @@
+/* Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V4
+ * Hallmark · genre: editorial (registro técnico) · macrostructure: Index-First · design-system: design.md · designed-as-app
+ * nav: N3 side-rail (izquierda · 17,5 rem · numerado) · footer: Ft4 dense typographic
+ *
+ * Shell de CENTINELA — RI-08. Mobile-first: la base es la pantalla angosta (barra superior con
+ * botón Módulos); desde 60 rem el riel queda fijo a la izquierda.
+ */
+
+.shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  min-height: 100vh;
+}
+
+/* ================================================================ Riel (N3) */
+.riel {
+  position: relative;
+  z-index: var(--z-sticky);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--color-paper-2);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+.riel__marca-banda {
+  display: none;
+}
+
+.riel__cuerpo {
+  display: grid;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  min-width: 0;
+}
+
+.riel__cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.marca {
+  display: grid;
+  gap: var(--space-3xs);
+  min-width: 0;
+}
+
+.marca__nombre {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  line-height: var(--leading-caps);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.marca__contexto {
+  font-size: var(--text-xs);
+  line-height: 1.35;
+  color: var(--color-muted);
+}
+
+.riel__lista {
+  display: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+.riel[data-abierto="true"] .riel__lista {
+  display: block;
+}
+
+.riel__item {
+  display: grid;
+  grid-template-columns: 2ch minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  min-height: var(--hit-min);
+  padding: var(--space-xs) var(--space-xs);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  text-align: left;
+  color: var(--color-ink-2);
+  background: transparent;
+  border: 0;
+  border-bottom: var(--rule-hair) solid var(--color-rule-2);
+  cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .riel__item:hover {
+    color: var(--color-ink);
+    background: var(--color-paper-3);
+  }
+}
+
+.riel__item:active {
+  background: var(--color-paper-3);
+}
+
+.riel__item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.riel__item[aria-current="page"] {
+  color: var(--color-ink);
+  background: var(--color-accent-wash);
+}
+
+.riel__num {
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-muted);
+}
+
+/* Marca del activo: un cuadrado celeste en lugar del número. Nunca una franja lateral. */
+.riel__item[aria-current="page"] .riel__num {
+  color: transparent;
+  background: linear-gradient(var(--color-accent), var(--color-accent)) center / var(--size-marca) var(--size-marca) no-repeat;
+}
+
+.riel__label {
+  min-width: 0;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.riel__cuenta {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-ink);
+}
+
+.riel__pie {
+  display: none;
+  gap: var(--space-xs);
+  padding-top: var(--space-sm);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+.riel[data-abierto="true"] .riel__pie {
+  display: grid;
+}
+
+.agente {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  font-size: var(--text-xs);
+  color: var(--color-ink-2);
+}
+
+/* ================================================================ Área de trabajo */
+.trabajo {
+  display: grid;
+  align-content: start;
+  gap: var(--space-xl);
+  min-width: 0;
+  padding: var(--space-lg) var(--space-md) var(--space-xl);
+}
+
+/* Más aire debajo de la cabecera que arriba: la cabecera se asienta sobre su contenido. */
+.trabajo > .cabecera {
+  margin-block-end: var(--space-xs);
+}
+
+.cabecera {
+  display: grid;
+  gap: var(--space-sm);
+  max-width: var(--width-trabajo);
+}
+
+.cabecera__titulo {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+}
+
+.cabecera__bajada {
+  max-width: var(--measure);
+  text-wrap: pretty;
+  font-size: var(--text-md);
+  color: var(--color-ink-2);
+}
+
+.cabecera__pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm) var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+/* ================================================================ Ficha de módulo en preparación */
+.ficha {
+  display: grid;
+  max-width: var(--width-trabajo);
+  border: var(--rule-hair) solid var(--color-rule);
+}
+
+.ficha__banda {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-ink-2);
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+.ficha__cuerpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ficha__seccion {
+  display: grid;
+  align-content: start;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md);
+  min-width: 0;
+}
+
+.ficha__seccion + .ficha__seccion {
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+.ficha__titulo {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+}
+
+.requisitos {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.requisito {
+  display: grid;
+  gap: var(--space-3xs);
+  font-size: var(--text-sm);
+  color: var(--color-ink-2);
+}
+
+.requisito__id {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-accent-strong);
+}
+
+.contrato {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.contrato__endpoint {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.contrato__resumen {
+  font-size: var(--text-md);
+}
+
+.desglose {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs) var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desglose__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.desglose__cifra {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.crudo summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--hit-min);
+  font-size: var(--text-sm);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-accent-strong);
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .crudo summary:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--space-3xs);
+  }
+}
+
+.crudo summary:active {
+  color: var(--color-ink);
+}
+
+.crudo pre {
+  max-height: 22rem;
+  margin: var(--space-xs) 0 0;
+  padding: var(--space-sm);
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  background: var(--color-paper-2);
+  border: var(--rule-hair) solid var(--color-rule-2);
+}
+
+/* ================================================================ Colofón (Ft4) */
+.colofon {
+  max-width: var(--measure-colofon);
+  padding-top: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 1.6;
+  color: var(--color-muted);
+  border-top: var(--rule-hair) solid var(--color-rule);
+}
+
+/* ================================================================ ≥ 40 rem */
+@media (min-width: 40rem) {
+  .trabajo {
+    padding: var(--space-lg) var(--space-xl) var(--space-2xl);
+  }
+
+  .trabajo > .cabecera {
+    margin-block-end: var(--space-md);
+  }
+
+  .ficha__cuerpo {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+
+  .ficha__seccion + .ficha__seccion {
+    border-top: 0;
+    border-left: var(--rule-hair) solid var(--color-rule);
+  }
+}
+
+/* ================================================================ ≥ 60 rem: riel fijo */
+@media (min-width: 60rem) {
+  .shell {
+    grid-template-columns: var(--rail-width) minmax(0, 1fr);
+  }
+
+  .riel {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    border-bottom: 0;
+    border-right: var(--rule-hair) solid var(--color-rule);
+  }
+
+  .riel__marca-banda {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: var(--space-md) 0;
+    border-right: var(--rule-hair) solid var(--color-rule);
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 800;
+    letter-spacing: var(--tracking-marca);
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+
+  .riel__cuerpo {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: var(--space-lg) var(--space-md);
+    overflow-y: auto;
+  }
+
+  .riel__boton-menu {
+    display: none;
+  }
+
+  /* La banda rotada muestra la marca; el nombre queda para lectores de pantalla. */
+  .marca__nombre {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .riel__lista {
+    display: block;
+    align-self: start;
+  }
+
+  .riel__pie {
+    display: grid;
+  }
+
+  .trabajo {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .trabajo > .cabecera {
+    margin-block-end: var(--space-lg);
+  }
+}

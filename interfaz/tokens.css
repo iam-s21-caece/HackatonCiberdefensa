@@ -1,0 +1,109 @@
+/* Hallmark · genre: editorial (registro técnico) · design-system: design.md · designed-as-app
+ * theme: custom · vibe: "expediente técnico, sala de situación, verificable, soberano"
+ * paper: oklch(97% 0.008 240) · accent: oklch(58% 0.12 238) celeste
+ * display: Big Shoulders Display · body: IBM Plex Sans · mono: IBM Plex Mono
+ * axes: light / display-condensed-bold / cool · studied: no · context: explicit
+ *
+ * Tokens de CENTINELA — RI-08. Única fuente de colores, fuentes, espacios y tiempos: ningún
+ * archivo de estilos escribe un valor crudo. Contraste verificado (WCAG): texto ≥ 4,5:1 y
+ * marcas ≥ 3:1 en los dos temas.
+ */
+
+:root {
+  /* ---- Expediente (tema principal, claro) ---- */
+  --color-paper:        oklch(97% 0.008 240);
+  --color-paper-2:      oklch(94% 0.010 240);
+  --color-paper-3:      oklch(91% 0.012 240);
+  --color-ink:          oklch(22% 0.014 245);
+  --color-ink-2:        oklch(38% 0.014 245);
+  --color-muted:        oklch(48% 0.012 245);
+  --color-rule:         oklch(80% 0.012 240);
+  --color-rule-2:       oklch(88% 0.010 240);
+
+  /* Acento celeste: sólo marca (activo, foco, filete). Nunca un bloque de color. */
+  --color-accent:        oklch(58% 0.12 238);
+  --color-accent-strong: oklch(46% 0.12 245);
+  --color-accent-wash:   oklch(91% 0.035 238);
+  --color-focus:         oklch(52% 0.16 245);
+
+  /* Señales de estado: funcionales, no decorativas. Siempre con glifo y palabra, nunca color solo. */
+  --color-bloquear:     oklch(48% 0.16 28);
+  --color-escalar:      oklch(50% 0.10 70);
+  --color-entregar:     oklch(48% 0.10 150);
+
+  /* ---- Tipografía (empaquetada localmente: sin pedidos a terceros) ---- */
+  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --font-body:    "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-2xs: 0.6875rem;
+  --text-xs:  0.75rem;
+  --text-sm:  0.875rem;
+  --text-md:  1rem;
+  --text-lg:  1.25rem;
+  --text-xl:  1.625rem;
+  --text-display: clamp(2.25rem, 2.5vw + 1.4rem, 3.5rem);
+  --leading-tight: 0.95;
+  --leading-body: 1.55;
+  --tracking-display: 0.01em;
+  --tracking-caps: 0.08em;
+  --tracking-marca: 0.3em;
+  --leading-caps: 1.02;
+
+  /* ---- Espacio: escala de 4 pt con nombres ---- */
+  --space-3xs: 0.125rem;
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  --measure: 64ch;
+  --measure-colofon: 72ch;
+  --width-trabajo: 72rem;
+  --size-marca: 0.55rem;
+  --size-forma: 0.6em;
+  --hit-min: 2.75rem;
+  --hit-compacto: 2rem;
+  --rail-width: 17.5rem;
+  --rule-hair: 1px;
+  --rule-strong: 2px;
+  --radius-sello: 2px;
+  --radius-control: 3px;
+
+  /* ---- Movimiento ---- */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-minor: 220ms;
+
+  /* ---- Capas ---- */
+  --z-base: 1;
+  --z-raised: 10;
+  --z-sticky: 200;
+}
+
+/* ---- Guardia nocturna (variante oscura, mismo tono) ---- */
+[data-theme="dark"] {
+  --color-paper:        oklch(17% 0.012 240);
+  --color-paper-2:      oklch(21% 0.014 240);
+  --color-paper-3:      oklch(25% 0.014 240);
+  --color-ink:          oklch(94% 0.008 240);
+  --color-ink-2:        oklch(82% 0.010 240);
+  --color-muted:        oklch(72% 0.012 240);
+  --color-rule:         oklch(36% 0.012 240);
+  --color-rule-2:       oklch(28% 0.012 240);
+
+  --color-accent:        oklch(70% 0.10 238);
+  --color-accent-strong: oklch(80% 0.10 238);
+  --color-accent-wash:   oklch(30% 0.04 238);
+  --color-focus:         oklch(76% 0.14 240);
+
+  --color-bloquear:     oklch(72% 0.14 28);
+  --color-escalar:      oklch(80% 0.11 75);
+  --color-entregar:     oklch(76% 0.11 150);
+}

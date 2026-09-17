@@ -1,0 +1,292 @@
+<title>Informe CENTINELA</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #F5F7F4;
+    --paper-2: #EBEFEA;
+    --ink: #1B2A24;
+    --ink-2: #3E4F47;
+    --muted: #66766E;
+    --line: #CFD8D2;
+    --accent: #2F6B4F;
+    --accent-soft: #DCEAE2;
+    --ochre: #A9761F;
+    --ochre-soft: #F3E8D2;
+    --crit: #B4362E;
+    --crit-soft: #F6DEDC;
+    --warn: #B07A16;
+    --warn-soft: #F5E9CF;
+    --ok: #2E7D4F;
+    --ok-soft: #DAEEE1;
+    --code-bg: #E7ECE8;
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --body: "Literata", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #141B18; --paper-2: #1B2420; --ink: #E6ECE8; --ink-2: #C3CDC7; --muted: #8E9C95; --line: #2E3A34;
+      --accent: #7FBF9C; --accent-soft: #1F3329; --ochre: #D9A84E; --ochre-soft: #33290F;
+      --crit: #E8776D; --crit-soft: #3A1E1B; --warn: #D9A84E; --warn-soft: #33290F; --ok: #7FBF9C; --ok-soft: #1F3329;
+      --code-bg: #1F2A25;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #141B18; --paper-2: #1B2420; --ink: #E6ECE8; --ink-2: #C3CDC7; --muted: #8E9C95; --line: #2E3A34;
+    --accent: #7FBF9C; --accent-soft: #1F3329; --ochre: #D9A84E; --ochre-soft: #33290F;
+    --crit: #E8776D; --crit-soft: #3A1E1B; --warn: #D9A84E; --warn-soft: #33290F; --ok: #7FBF9C; --ok-soft: #1F3329;
+    --code-bg: #1F2A25;
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; padding-inline: 20px; padding-block: 0 96px; }
+  .doc { max-width: 72ch; margin: 0 auto; }
+
+  /* ---------- cabecera ---------- */
+  header.top { border-bottom: 3px solid var(--accent); padding-block: 48px 28px; margin-bottom: 40px; }
+  .eyebrow { font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 6vw, 52px); line-height: 1.02; letter-spacing: -.01em; margin: 0 0 12px; text-wrap: balance; }
+  .subtitle { font-size: 21px; line-height: 1.35; color: var(--ink-2); margin: 0 0 28px; text-wrap: balance; }
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px 24px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .meta div { display: grid; gap: 2px; }
+  .meta dt { font-family: var(--display); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .meta dd { margin: 0; font-size: 15px; font-family: var(--display); font-weight: 500; }
+
+  /* ---------- tipografía ---------- */
+  h2 { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.15; margin: 56px 0 14px; text-wrap: balance; display: flex; align-items: baseline; gap: 14px; }
+  h2 .n { font-size: 13px; letter-spacing: .1em; color: var(--accent); font-weight: 600; flex: none; }
+  h3 { font-family: var(--display); font-weight: 600; font-size: 18px; margin: 30px 0 8px; }
+  p { margin: 0 0 16px; }
+  p.lead { font-size: 19px; line-height: 1.5; }
+  ul, ol { padding-left: 1.3em; margin: 0 0 16px; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); }
+  strong { font-weight: 600; }
+  code { font-family: var(--mono); font-size: .86em; background: var(--code-bg); padding: 1px 6px; border-radius: 3px; }
+  pre { font-family: var(--mono); font-size: 14px; line-height: 1.5; background: var(--code-bg); padding: 14px 16px; border-radius: 4px; overflow-x: auto; margin: 0 0 18px; }
+  pre code { background: none; padding: 0; font-size: inherit; }
+  a { color: var(--accent); }
+
+  /* ---------- callouts ---------- */
+  .callout { border-left: 4px solid var(--ochre); background: var(--ochre-soft); padding: 14px 18px; margin: 20px 0 24px; border-radius: 0 4px 4px 0; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .k { font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ochre); display: block; margin-bottom: 4px; }
+
+  /* ---------- veredictos ---------- */
+  .verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 18px 0 26px; }
+  .verdicts div { border: 1px solid var(--line); border-top-width: 4px; padding: 14px 16px; background: var(--paper-2); }
+  .verdicts .name { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: .02em; display: block; margin-bottom: 6px; }
+  .verdicts .vp { border-top-color: var(--crit); } .verdicts .vp .name { color: var(--crit); }
+  .verdicts .esc { border-top-color: var(--warn); } .verdicts .esc .name { color: var(--warn); }
+  .verdicts .fp { border-top-color: var(--ok); } .verdicts .fp .name { color: var(--ok); }
+  .verdicts p { margin: 0; font-size: 15px; line-height: 1.45; }
+
+  /* ---------- etapas ---------- */
+  .stages { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px 0 10px; counter-reset: st; }
+  .stage { background: var(--paper-2); border: 1px solid var(--line); padding: 12px 14px; position: relative; }
+  .stage::before { counter-increment: st; content: counter(st); font-family: var(--display); font-weight: 700; font-size: 12px; color: var(--accent); letter-spacing: .1em; display: block; margin-bottom: 4px; }
+  .stage b { font-family: var(--display); font-weight: 600; font-size: 15px; display: block; margin-bottom: 4px; line-height: 1.25; }
+  .stage span { font-size: 13.5px; color: var(--ink-2); line-height: 1.4; display: block; }
+  .stage .t { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 8px; display: block; }
+  .sources { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px 14px; margin: 10px 0 24px; padding: 14px 16px; border: 1px dashed var(--line); }
+  .sources span { font-family: var(--mono); font-size: 13px; }
+  .sources span.local { color: var(--accent); }
+  .sources .lbl { grid-column: 1 / -1; font-family: var(--display); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+
+  /* ---------- tablas ---------- */
+  .tw { overflow-x: auto; margin: 16px 0 26px; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.4; }
+  th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+  th { font-family: var(--display); font-weight: 600; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--line); }
+  td.num { font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: 14px; white-space: nowrap; }
+  td code { white-space: nowrap; }
+  .pill { display: inline-block; font-family: var(--mono); font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 3px; white-space: nowrap; }
+  .pill.vp { background: var(--crit-soft); color: var(--crit); }
+  .pill.esc { background: var(--warn-soft); color: var(--warn); }
+  .pill.fp { background: var(--ok-soft); color: var(--ok); }
+  .pill.n { background: var(--accent-soft); color: var(--accent); }
+
+  /* ---------- guardrails ---------- */
+  .rules { display: grid; gap: 8px; margin: 14px 0 22px; }
+  .rules div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 14px; background: var(--paper-2); border: 1px solid var(--line); font-size: 15px; }
+  @media (max-width: 520px) { .rules div { grid-template-columns: 1fr; } }
+
+  .score-scale { display: grid; grid-template-columns: 30fr 35fr 35fr; gap: 3px; margin: 10px 0 6px; font-family: var(--mono); font-size: 12.5px; }
+  .score-scale div { padding: 8px 10px; color: var(--ink); }
+  .score-scale .a { background: var(--ok-soft); } .score-scale .b { background: var(--warn-soft); } .score-scale .c { background: var(--crit-soft); }
+
+  footer { margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); font-family: var(--display); }
+  .glos dt { font-family: var(--mono); font-size: 14px; font-weight: 500; margin-top: 10px; }
+  .glos dd { margin: 2px 0 0; font-size: 15px; }
+  @media print { body { padding: 0; font-size: 12pt; } header.top { padding-top: 0; } }
+</style>
+
+<div class="doc">
+<header class="top">
+  <p class="eyebrow">Informe técnico · Hackathon de Ciberdefensa · Ejército Argentino</p>
+  <h1>CENTINELA</h1>
+  <p class="subtitle">Triage automático de correos de phishing con inteligencia artificial, ejecutado íntegramente dentro de la red de la organización.</p>
+  <dl class="meta">
+    <div><dt>Eje temático</dt><dd>Inteligencia artificial para la defensa</dd></div>
+    <div><dt>Equipo</dt><dd>Pablo Bernal · Elian</dd></div>
+    <div><dt>Mentores</dt><dd>Lucas · Daniel Briter</dd></div>
+    <div><dt>Fecha</dt><dd>16 de septiembre de 2026</dd></div>
+    <div><dt>Estado</dt><dd>Prototipo funcional, verificado de punta a punta</dd></div>
+    <div><dt>Stack</dt><dd>n8n 2.39 · Ollama (Llama 3.2) · Docker</dd></div>
+  </dl>
+</header>
+
+<h2><span class="n">01</span>Resumen ejecutivo</h2>
+<p class="lead">CENTINELA recibe cada correo que entra a una organización, lo desarma pieza por pieza, envía cada pieza a la fuente de inteligencia de amenazas que sabe de esa pieza, consolida la evidencia y le pide a una IA local que decida qué hacer con el mensaje: bloquearlo, entregarlo o derivarlo a un investigador humano.</p>
+<p>El objetivo de esta primera versión es <strong>limpiar y filtrar el tráfico malicioso de forma automática</strong>, de modo que los analistas del SOC sólo dediquen tiempo a los casos que realmente requieren criterio humano. Cada decisión queda documentada con la evidencia que la sostiene: qué se encontró, en qué fuente, con qué peso, y por qué se resolvió así.</p>
+<p>Tres propiedades lo distinguen de un filtro antispam tradicional:</p>
+<ul>
+  <li><strong>Soberanía de datos.</strong> El correo nunca sale de la red. La IA es un modelo open-source ejecutado en un servidor propio. Hacia internet sólo viajan hashes, dominios e IPs para consultar reputación, nunca el contenido.</li>
+  <li><strong>Señales que las firmas no ven.</strong> Antigüedad del dominio, certificados TLS recién emitidos, imitaciones del dominio institucional, incoherencias entre remitente y dirección de respuesta, temática militar desde dominios externos. Son las marcas del <em>spear-phishing</em> dirigido, que por definición no tiene firma previa.</li>
+  <li><strong>La IA propone, las reglas tienen veto.</strong> Un motor de reglas determinístico y auditable puntúa la evidencia; la IA interpreta y explica; un conjunto de <em>guardrails</em> impide que un modelo se equivoque en la dirección peligrosa. Lo dudoso va a un humano. Nada se pierde.</li>
+</ul>
+
+<h2><span class="n">02</span>El problema</h2>
+<p>El phishing sigue siendo el vector de entrada número uno en incidentes contra organismos estatales y fuerzas armadas: una credencial robada abre la puerta a la red interna, al espionaje y al ransomware. Un SOC institucional recibe miles de correos por día. Analizar uno a mano —leer cabeceras, verificar SPF/DKIM/DMARC, buscar cada dominio, calcular el hash de cada adjunto y consultarlo, mirar quién registró el dominio y cuándo— lleva entre diez y veinte minutos a un analista con experiencia. No escala.</p>
+<p>Las herramientas comerciales resuelven el problema de volumen, pero con dos costos que pesan especialmente en defensa: el correo se procesa en nubes de terceros, y la detección depende de firmas y listas negras que un atacante dirigido conoce y evita. Un correo que imita a la Jefatura de Sistemas desde un dominio registrado ayer no figura en ninguna lista.</p>
+
+<h2><span class="n">03</span>Qué hace la herramienta</h2>
+<p>Para cada correo, CENTINELA produce un veredicto, una acción y un reporte. Los veredictos posibles son tres:</p>
+<div class="verdicts">
+  <div class="vp"><span class="name">VERDADERO_POSITIVO</span><p>Phishing, malware o fraude confirmado. Se retiene en cuarentena y se alerta al SOC con los indicadores de compromiso y las técnicas MITRE ATT&amp;CK involucradas.</p></div>
+  <div class="esc"><span class="name">ESCALAR</span><p>Evidencia insuficiente o contradictoria. El correo queda retenido y se abre un caso en la cola del investigador con lo que hay que revisar y por qué se escaló.</p></div>
+  <div class="fp"><span class="name">FALSO_POSITIVO</span><p>Correo legítimo. Se entrega al destinatario y se deja traza en la bitácora para auditoría y para ajustar los pesos con el tiempo.</p></div>
+</div>
+<p>El reporte de cada correo incluye la lista completa de hallazgos ordenados por severidad, el puntaje y su desglose por categoría, el estado de cada fuente consultada, la respuesta íntegra de la IA, el veredicto final con su justificación, y los indicadores de compromiso en formato <em>defanged</em> (<code>hxxp://mercadopago-reembolsos[.]click</code>) para que puedan pegarse en un ticket o un chat sin riesgo de clic accidental.</p>
+
+<h2><span class="n">04</span>Cómo funciona</h2>
+<p>El flujo está construido en n8n, una plataforma de automatización de código abierto que se ejecuta en Docker. Tiene 27 nodos organizados en cinco etapas:</p>
+<div class="stages">
+  <div class="stage"><b>Entrada</b><span>Un webhook recibe el correo desde el gateway (JSON o <code>.eml</code> completo). Alternativa: lectura directa de una casilla por IMAP.</span></div>
+  <div class="stage"><b>Desarmado</b><span>Un parser MIME propio descompone el mensaje en cabeceras, autenticación, IPs, dominios, URLs, adjuntos con hash y cuerpo.</span><span class="t">&lt; 1 s</span></div>
+  <div class="stage"><b>Análisis en paralelo</b><span>Diez analizadores reciben las piezas y consultan, cada uno, la fuente que le corresponde. Ninguno bloquea a los demás; si una fuente falla, informa “sin datos” y sigue.</span><span class="t">5 – 15 s</span></div>
+  <div class="stage"><b>Decisión</b><span>Se consolida la evidencia, se calcula el puntaje, se aplican reglas duras, decide la IA local y actúan los guardrails.</span><span class="t">IA: 25 – 130 s en CPU</span></div>
+  <div class="stage"><b>Acción</b><span>Se responde al gateway, se guarda el reporte y se ejecuta la acción del veredicto: cuarentena y alerta, cola del investigador, o entrega.</span><span class="t">&lt; 1 s</span></div>
+</div>
+<div class="sources">
+  <span class="lbl">Los diez analizadores</span>
+  <span class="local">Cabeceras y SPF/DKIM/DMARC</span><span class="local">Heurísticas de cuerpo, URLs y adjuntos</span>
+  <span>VirusTotal</span><span>AbuseIPDB</span><span>crt.sh</span><span>RDAP / WHOIS</span><span>URLhaus</span><span>MalwareBazaar</span><span>ThreatFox</span><span>DNS (MX / SPF / DMARC)</span>
+  <span class="lbl" style="margin-top:6px">En verde: análisis local, sin consultas externas. El resto: fuentes públicas de inteligencia de amenazas. Sin ninguna API key, el sistema funciona con los dos analizadores locales más crt.sh, RDAP y DNS.</span>
+</div>
+
+<h2><span class="n">05</span>Qué piezas se analizan y contra qué</h2>
+<div class="tw">
+<table>
+  <thead><tr><th>Pieza</th><th>Qué se revisa</th><th>Fuentes</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Remitente</strong></td><td>From vs. Reply-To vs. Return-Path; nombre visible que contradice la dirección real; cuenta gratuita con nombre institucional; Punycode; suplantación del dominio propio.</td><td>Cabeceras, DNS</td></tr>
+    <tr><td><strong>Autenticación</strong></td><td>Resultado y alineación de SPF, DKIM y DMARC; dominio DKIM distinto del From; políticas publicadas por el dominio (¿tiene MX? ¿publica SPF? ¿DMARC en <code>reject</code>?).</td><td>Cabeceras, DNS</td></tr>
+    <tr><td><strong>IPs de la cadena de envío</strong></td><td>Reputación, reportes de abuso, nodos Tor, hosting/VPS en lugar de infraestructura de correo, país y proveedor.</td><td>VirusTotal, AbuseIPDB, ThreatFox</td></tr>
+    <tr><td><strong>Dominios</strong></td><td>Detecciones y categoría; fecha de registro (menos de 30 días: crítico); fecha del primer certificado TLS; subdominios con nombres de captura (<code>login</code>, <code>verificar</code>); dominio inexistente.</td><td>VirusTotal, RDAP, crt.sh, ThreatFox, DNS</td></tr>
+    <tr><td><strong>URLs</strong></td><td>Detecciones y redirecciones; texto del enlace que muestra un dominio y apunta a otro; IP literal; acortadores; TLD abusados; hosting gratuito; <code>@</code> en la URL; puertos raros; palabras de captura de credenciales en la ruta.</td><td>VirusTotal, URLhaus, heurísticas</td></tr>
+    <tr><td><strong>Adjuntos</strong></td><td>SHA-256 y MD5 contra muestras conocidas; ejecutables y scripts; doble extensión (<code>.pdf.exe</code>); documentos con macros; ISO/IMG/LNK/OneNote; HTML y SVG (<em>HTML smuggling</em>); caracteres Unicode invisibles en el nombre; tipo MIME que no coincide con la extensión.</td><td>VirusTotal, MalwareBazaar, heurísticas</td></tr>
+    <tr><td><strong>Cuerpo y HTML</strong></td><td>Lenguaje de urgencia, pedido de credenciales, temática financiera, amenazas legales o disciplinarias, temática militar desde dominios externos; formularios y campos de contraseña embebidos; scripts, iframes, texto oculto, píxeles de rastreo; falsos hilos “RE:” sin conversación previa.</td><td>Heurísticas</td></tr>
+    <tr><td><strong>Lookalikes</strong></td><td>Distancia de edición y normalización de homoglifos (<code>rn→m</code>, <code>0→o</code>, <code>1→l</code>) contra los dominios propios y contra marcas frecuentemente suplantadas en Argentina: ARCA/AFIP, ANSES, PAMI, Mercado Pago, bancos, Correo Argentino, Microsoft, Google.</td><td>Heurísticas</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Cada analizador devuelve hallazgos en un formato común: categoría, tipo, valor, severidad (info, baja, media, alta, crítica), peso numérico y explicación en lenguaje de analista. Ejemplo real de una prueba: <em>“El texto del enlace muestra intranet.ejercito.mil.ar pero apunta a portal-ejercito-argentina.com.ar”</em> (alta, 20 puntos).</p>
+
+<h2><span class="n">06</span>La decisión: reglas, IA y guardrails</h2>
+<h3>Motor de reglas</h3>
+<p>Suma los pesos de los hallazgos con <strong>rendimientos decrecientes por categoría</strong> (el primer hallazgo de una categoría vale el 100 %, el segundo el 70 %, el tercero el 50 %, los siguientes el 30 %) y un tope por categoría. Así, diez palabras de urgencia no pesan lo mismo que un hash de malware conocido. Las señales a favor restan: un remitente del dominio propio con SPF y DKIM válidos y sin enlaces ni adjuntos descuenta 25 puntos. El resultado es un puntaje de 0 a 100:</p>
+<div class="score-scale"><div class="a">0 – 29 · FALSO_POSITIVO</div><div class="b">30 – 64 · ESCALAR</div><div class="c">65 – 100 · VERDADERO_POSITIVO</div></div>
+<p>Además, ciertas evidencias son <strong>reglas duras</strong> que deciden por sí solas, sin importar el puntaje: adjunto identificado como malware conocido, indicador confirmado por una fuente de inteligencia, ejecutable adjunto, campo de contraseña embebido en el HTML, dominio remitente inexistente, o imitación del dominio propio combinada con fallo de autenticación.</p>
+<p>El motor es determinístico: el mismo correo produce siempre el mismo puntaje y el mismo desglose. Eso lo hace auditable, un requisito para cualquier sistema que tome decisiones sobre comunicaciones de una fuerza armada.</p>
+
+<h3>IA local</h3>
+<p>La evidencia consolidada se envía a un modelo de lenguaje ejecutado en Ollama, dentro del mismo Docker (<code>llama3.2:3b</code> por defecto; intercambiable por Qwen 2.5 o Llama 3.1 8B con GPU). El <em>system prompt</em> lo posiciona como analista senior de un SOC de ciberdefensa, le prohíbe inventar datos, le indica bajar la confianza cuando faltan fuentes y le exige responder únicamente en JSON con un esquema fijo: veredicto, confianza (0–1), tipo de amenaza, resumen para el analista, indicadores clave, acciones recomendadas, técnicas MITRE ATT&amp;CK y un mensaje en lenguaje simple para el destinatario.</p>
+<p>El valor de la IA no es reemplazar al motor de reglas sino <strong>interpretar y explicar</strong>: convertir treinta hallazgos en dos oraciones que un analista lee en cinco segundos, y en una frase que un suboficial sin formación técnica entiende (“No hagas clic en el enlace y no proporciones tus credenciales”).</p>
+
+<h3>Guardrails</h3>
+<p>La IA propone; las reglas tienen veto. Antes de emitir el veredicto final se aplican estas verificaciones, en orden:</p>
+<div class="rules">
+  <div><span>Hay una regla dura activada</span><span class="pill vp">→ VERDADERO_POSITIVO</span></div>
+  <div><span>La IA dice “limpio” pero el puntaje es 55 o más</span><span class="pill esc">→ ESCALAR</span></div>
+  <div><span>La IA dice “malicioso” con puntaje menor a 20 y sin reglas duras</span><span class="pill esc">→ ESCALAR</span></div>
+  <div><span>Confianza de la IA menor a 0,55</span><span class="pill esc">→ ESCALAR</span></div>
+  <div><span>Dos o menos fuentes disponibles y el correo no es claramente limpio</span><span class="pill esc">→ ESCALAR</span></div>
+  <div><span>La IA no responde o devuelve algo inválido</span><span class="pill n">→ decide el motor de reglas</span></div>
+</div>
+<p>Dos consecuencias prácticas: la IA nunca puede “perdonar” un malware conocido, y el sistema nunca bloquea un correo sin evidencia concreta. Y si el modelo se cae, el flujo sigue funcionando con el motor de reglas. Los identificadores MITRE que devuelve el modelo se validan por formato; un correo legítimo no lleva técnica de ataque.</p>
+
+<h2><span class="n">07</span>Resultados de las pruebas</h2>
+<p>Se probó el flujo completo (webhook → n8n → Ollama → archivos) con cuatro correos simulados, construidos a partir de patrones reales de campañas contra organismos argentinos. Sin API keys cargadas: sólo análisis local, crt.sh, RDAP y DNS.</p>
+<div class="tw">
+<table>
+  <thead><tr><th>Correo de prueba</th><th>Veredicto</th><th>Puntaje</th><th>Hallazgos</th><th>IA</th><th>Tiempo</th></tr></thead>
+  <tbody>
+    <tr><td>“Mesa de Ayuda – Ejército Argentino” desde <code>ejercito-mil.ar</code>, Reply-To en Gmail, enlace con texto engañoso, SPF y DMARC fail</td><td><span class="pill vp">VERDADERO_POSITIVO</span></td><td class="num">100</td><td class="num">30</td><td>Coincide · conf. 0,8 · T1566.002</td><td class="num">141 s</td></tr>
+    <tr><td>Falso Mercado Pago en <code>.eml</code> crudo: reembolso de $45.900, dominio <code>.online</code>, link a <code>.click</code>, adjunto <code>Comprobante.pdf.exe</code></td><td><span class="pill vp">VERDADERO_POSITIVO</span></td><td class="num">100</td><td class="num">24</td><td>Coincide · conf. 0,8</td><td class="num">142 s</td></tr>
+    <tr><td>“Tesorería – Liquidación de haberes” con adjunto cuyo hash es el archivo de prueba EICAR</td><td><span class="pill vp">VERDADERO_POSITIVO</span></td><td class="num">100</td><td class="num">14</td><td>Motor de reglas (prueba local)</td><td class="num">4 s</td></tr>
+    <tr><td>Boletín semanal desde <code>comunicaciones@ejercito.mil.ar</code>, SPF/DKIM/DMARC pass, sin enlaces ni adjuntos</td><td><span class="pill fp">FALSO_POSITIVO</span></td><td class="num">0</td><td class="num">5 (info)</td><td>Coincide · conf. 0,8</td><td class="num">23 s</td></tr>
+  </tbody>
+</table>
+</div>
+<p>En los tres casos maliciosos el motor de reglas y la IA coincidieron. En el correo en formato <code>.eml</code> se verificó el parser completo: decodificación de asunto RFC 2047, cuerpo <em>quoted-printable</em>, adjunto base64 con hash SHA-256 calculado, y detección de la doble extensión. El correo legítimo obtuvo puntaje cero gracias a las señales a favor y fue entregado. Los tiempos corresponden a una PC sin GPU; el 90 % es inferencia del modelo. Con GPU baja a pocos segundos por correo.</p>
+<div class="callout"><span class="k">Verificado</span><p>Los reportes de estas corridas están en <code>data/reports/</code> y las decisiones en <code>data/bitacora/VERDADERO_POSITIVO.jsonl</code>. Las ejecuciones también pueden verse en la pestaña <em>Executions</em> de n8n, con los datos que pasaron por cada nodo.</p></div>
+
+<h2><span class="n">08</span>Por qué es relevante para la defensa</h2>
+<ul>
+  <li><strong>Reduce la carga del SOC donde más duele.</strong> El triage inicial de correos sospechosos es repetitivo y consume horas de analistas escasos. Automatizar lo claro y documentar lo dudoso deja a las personas para lo que sólo las personas hacen.</li>
+  <li><strong>Detecta el ataque dirigido, no sólo el masivo.</strong> Las señales de infraestructura (dominio de tres días, primer certificado ayer, sin MX) y de identidad (Reply-To externo, nombre institucional desde freemail) aparecen aunque el atacante haya escrito un correo impecable y use un dominio que nadie vio antes.</li>
+  <li><strong>No exporta información.</strong> Un correo interno puede contener información sensible. CENTINELA no lo envía a ningún servicio externo; sólo consulta reputación de indicadores técnicos, y puede operar totalmente aislado si se deshabilitan esas consultas.</li>
+  <li><strong>Es explicable y auditable.</strong> Cada veredicto tiene una cadena de evidencia. Un oficial puede leer el reporte y entender por qué se bloqueó un correo, y un investigador puede revertir la decisión con fundamento.</li>
+  <li><strong>Es adaptable a la organización.</strong> Los dominios propios, las marcas a proteger, los pesos y los umbrales son parámetros. Cada unidad puede tener su perfil.</li>
+</ul>
+
+<h2><span class="n">09</span>Datos utilizados</h2>
+<ul>
+  <li><strong>Correos:</strong> simulados, escritos para las pruebas. Reproducen suplantación institucional, falsos avisos de Mercado Pago, liquidación de haberes con adjunto y un boletín interno legítimo. Los dominios de los remitentes maliciosos fueron inventados y no existen.</li>
+  <li><strong>Inteligencia de amenazas:</strong> fuentes públicas. VirusTotal, AbuseIPDB y abuse.ch (URLhaus, MalwareBazaar, ThreatFox) con claves gratuitas; Certificate Transparency (crt.sh), RDAP (IANA y NIC Argentina) y DNS público sin clave. El único hash de malware de las pruebas es el del archivo EICAR, el estándar inofensivo para probar antivirus.</li>
+  <li><strong>IA:</strong> Llama 3.2 3B (Meta, licencia abierta), ejecutado localmente con Ollama. No se envía nada a proveedores de IA.</li>
+</ul>
+
+<h2><span class="n">10</span>Requisitos y puesta en marcha</h2>
+<p>Docker Desktop y, opcionalmente, una GPU NVIDIA. Todo el despliegue es un archivo <code>docker-compose.yml</code>:</p>
+<pre><code>cp .env.example .env            # API keys (opcionales)
+docker compose up -d            # n8n + Ollama
+docker exec centinela-ollama ollama pull llama3.2:3b
+docker exec centinela-n8n n8n import:workflow --input=/workflow/centinela_workflow.json
+docker exec centinela-n8n n8n update:workflow --id=CentinelaPhish01 --active=true
+docker restart centinela-n8n
+
+.\scripts\analizar.ps1 .\samples\phishing_reembolso.eml   # probar</code></pre>
+<p>El repositorio contiene el flujo exportado, el código de cada nodo como archivo <code>.js</code> independiente (legible y versionable), un generador del flujo, un <em>harness</em> que ejecuta la cadena sin n8n para depuración, las muestras y los scripts de prueba.</p>
+
+<h2><span class="n">11</span>Limitaciones actuales</h2>
+<ul>
+  <li>La acción “cuarentena” del prototipo registra y alerta; el movimiento físico del correo requiere el conector al gateway de cada organización (Exchange/Graph, Postfix milter), que está previsto pero no implementado.</li>
+  <li>Sin GPU, la inferencia del modelo tarda entre uno y dos minutos por correo. Es aceptable para una cola de triage, no para línea de entrega en tiempo real; con GPU el problema desaparece.</li>
+  <li>Las cuotas gratuitas de VirusTotal (4 consultas por minuto) obligan a limitar la cantidad de artefactos consultados por correo. Con clave institucional se elimina el límite.</li>
+  <li>Los pesos de las heurísticas fueron calibrados con criterio de analista y con las pruebas realizadas, no con un conjunto de datos etiquetado grande. La bitácora está diseñada para permitir esa calibración con datos reales.</li>
+  <li>No analiza imágenes ni códigos QR (<em>quishing</em>), ni detona adjuntos en sandbox.</li>
+</ul>
+
+<h2><span class="n">12</span>Próximos pasos</h2>
+<ol>
+  <li>Conector a Microsoft Graph / Exchange y a Postfix para cuarentena real y lectura automática de casillas.</li>
+  <li>Panel web de la cola del investigador, con botones “confirmar” / “era legítimo” que retroalimentan los pesos.</li>
+  <li>Detonación de adjuntos en sandbox local (CAPE) como fuente adicional.</li>
+  <li>Modelo multimodal local para analizar imágenes y QR embebidos.</li>
+  <li>Ajuste fino del modelo con las decisiones validadas por los analistas de la propia fuerza.</li>
+</ol>
+
+<h2><span class="n">13</span>Glosario</h2>
+<dl class="glos">
+  <dt>SPF / DKIM / DMARC</dt><dd>Los tres mecanismos con que un dominio declara qué servidores pueden enviar en su nombre (SPF), firma criptográficamente sus mensajes (DKIM) y establece qué hacer cuando algo falla (DMARC). Un correo que los falla está usando un dominio que no lo autoriza.</dd>
+  <dt>IOC</dt><dd>Indicador de compromiso: una IP, dominio, URL o hash asociado a actividad maliciosa.</dd>
+  <dt>Defanged</dt><dd>Indicador escrito de forma que no sea clickeable (<code>hxxp://</code>, <code>[.]</code>), para compartirlo con seguridad.</dd>
+  <dt>MITRE ATT&amp;CK</dt><dd>Catálogo estándar de técnicas de ataque. <code>T1566.001</code> es phishing con adjunto; <code>T1566.002</code>, phishing con enlace.</dd>
+  <dt>Lookalike / homoglifo</dt><dd>Dominio que imita a otro cambiando o intercalando caracteres parecidos (<code>ejercito-mil.ar</code>, <code>rnil.ar</code>).</dd>
+  <dt>Human-in-the-loop</dt><dd>Diseño en el que el sistema automatiza lo claro y deriva lo dudoso a una persona, en lugar de decidir todo solo.</dd>
+</dl>
+
+<footer>CENTINELA · Hackathon de Ciberdefensa del Ejército Argentino · Septiembre de 2026 · Código y documentación en el repositorio del equipo.</footer>
+</div>

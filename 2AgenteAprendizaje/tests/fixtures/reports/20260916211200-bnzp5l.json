@@ -1,0 +1,509 @@
+{
+ "report_id": "20260916211200-bnzp5l",
+ "recibido_en": "2026-09-16T21:12:00.832Z",
+ "origen_entrada": "eml_crudo",
+ "notas_parser": [],
+ "config": {
+  "vt_api_key": "",
+  "abuseipdb_api_key": "",
+  "abusech_api_key": "",
+  "ollama_url": "http://ollama:11434",
+  "ollama_model": "llama3.2:3b",
+  "dominios_propios": [
+   "ejercito.mil.ar",
+   "argentina.gob.ar",
+   "mil.ar"
+  ],
+  "soc_webhook_url": ""
+ },
+ "correo": {
+  "de": {
+   "raw": "\"Cnel. Ricardo Paz - Jefatura\" <ricardo.paz@ejercito.mil.ar>",
+   "nombre": "Cnel. Ricardo Paz - Jefatura",
+   "direccion": "ricardo.paz@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "reply_to": {
+   "raw": "",
+   "nombre": "",
+   "direccion": "",
+   "dominio": "",
+   "dominio_registrable": ""
+  },
+  "return_path": {
+   "raw": "<ricardo.paz@ejercito.mil.ar>",
+   "nombre": "",
+   "direccion": "ricardo.paz@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "para": "<tesoreria@ejercito.mil.ar>",
+  "asunto": "Pedido reservado",
+  "fecha": "Wed, 16 Sep 2026 09:11:58 -0300",
+  "message_id": "<a81f22c9@srv-notif.net>",
+  "auth": {
+   "spf": "pass",
+   "dkim": "pass",
+   "dmarc": "pass",
+   "dkim_dominio": "ejercito.mil.ar"
+  },
+  "saltos": 1,
+  "cuerpo_muestra": "Buen día. Estoy en reunión con el Estado Mayor y no puedo atender llamadas.\nNecesito que hoy mismo gestiones una transferencia de $2.850.000 al CBU 0170099220000067797370 por una compra reservada de la Jefatura. Es urgente y confidencial, no lo comentes con nadie hasta que yo vuelva.\nConfirmame por este medio cuando esté hecho.\n\nCnel. Ricardo Paz\nJefatura de Estado Mayor"
+ },
+ "artefactos": {
+  "ips": [
+   "203.0.113.45"
+  ],
+  "dominios": [
+   "ejercito.mil.ar"
+  ],
+  "urls": [],
+  "adjuntos": [],
+  "hashes": []
+ },
+ "iocs_defanged": {
+  "remitente": "ricardo[.]paz@ejercito[.]mil[.]ar",
+  "reply_to": null,
+  "ips": [
+   "203[.]0[.]113[.]45"
+  ],
+  "dominios": [
+   "ejercito[.]mil[.]ar"
+  ],
+  "urls": [],
+  "adjuntos": []
+ },
+ "score": 100,
+ "nivel": "CRITICO",
+ "veredicto_reglas": "VERDADERO_POSITIVO",
+ "reglas_duras": [],
+ "score_por_categoria": {
+  "autenticacion": 40,
+  "identidad": 25,
+  "contexto": 20,
+  "ingenieria_social": 23,
+  "cabeceras": 5,
+  "dns": -6
+ },
+ "hallazgos": [
+  {
+   "categoria": "autenticacion",
+   "tipo": "a1_autenticacion_forjada",
+   "valor": "SPF declarado pass, recalculado fail; DMARC declarado pass, recalculado fail",
+   "severidad": "critica",
+   "peso": 40,
+   "detalle": "La cabecera Authentication-Results afirma una autenticación que el recálculo refuta: la cabecera fue escrita por el remitente, no por nuestro servidor.",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "identidad",
+   "tipo": "a1_suplantacion_dominio_propio",
+   "valor": "ricardo.paz@ejercito.mil.ar",
+   "severidad": "critica",
+   "peso": 40,
+   "detalle": "El correo dice venir de ejercito.mil.ar, dominio de la organización, pero ni SPF ni DKIM lo respaldan: suplantación verificada del dominio propio.",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "contexto",
+   "tipo": "a1_patron_bec_primer_contacto",
+   "valor": "Cnel. Ricardo, Jefatura, Estado Mayor",
+   "severidad": "critica",
+   "peso": 20,
+   "detalle": "Se presenta como autoridad (Cnel. Ricardo, Jefatura, Estado Mayor), da una instrucción de pago y su identidad no está verificada, y es la primera vez que le escribe a este destinatario.",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "a1_dmarc_recalculado_fail_reject",
+   "valor": "ejercito.mil.ar p=reject",
+   "severidad": "alta",
+   "peso": 25,
+   "detalle": "DMARC recalculado falla: no pasa ni SPF (fail para ejercito.mil.ar) ni DKIM (el correo no está firmado) alineados con ejercito.mil.ar. El dueño del dominio pide 'reject' para estos correos.",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "a1_spf_recalculado_fail",
+   "valor": "203.0.113.45 → ejercito.mil.ar",
+   "severidad": "alta",
+   "peso": 20,
+   "detalle": "SPF recalculado: la IP 203.0.113.45 (entregó el correo a mx4.ejercito.mil.ar) no está autorizada por ejercito.mil.ar (v=spf1 a mx ip4:179.51.212.118 -all).",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_financiero",
+   "valor": "transferencia, cbu",
+   "severidad": "media",
+   "peso": 12,
+   "detalle": "Lenguaje de financiero (2 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_urgencia",
+   "valor": "urgente, urgent",
+   "severidad": "media",
+   "peso": 10,
+   "detalle": "Lenguaje de urgencia (2 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_institucional",
+   "valor": "estado mayor, jefatura",
+   "severidad": "baja",
+   "peso": 8,
+   "detalle": "Lenguaje de institucional (2 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "message_id_dominio_distinto",
+   "valor": "<a81f22c9@srv-notif.net>",
+   "severidad": "baja",
+   "peso": 5,
+   "detalle": "Message-ID generado en srv-notif.net, no en el dominio del From",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "identidad",
+   "tipo": "interno_autenticado",
+   "valor": "ricardo.paz@ejercito.mil.ar",
+   "severidad": "info",
+   "peso": -15,
+   "detalle": "Remitente de dominio propio con SPF y DKIM válidos",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "dns",
+   "tipo": "dominio_bien_protegido",
+   "valor": "ejercito.mil.ar",
+   "severidad": "info",
+   "peso": -6,
+   "detalle": "Dominio con SPF + DMARC reject y SPF pass: difícil de suplantar",
+   "fuente": "dns"
+  },
+  {
+   "categoria": "dns",
+   "tipo": "dominio_propio_protegido",
+   "valor": "ejercito.mil.ar",
+   "severidad": "info",
+   "peso": 0,
+   "detalle": "Dominio propio con SPF/DMARC publicados",
+   "fuente": "dns"
+  }
+ ],
+ "n_hallazgos": 12,
+ "fuentes": {
+  "cabeceras": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "spf": "pass",
+    "dkim": "pass",
+    "dmarc": "pass",
+    "dkim_dominio": "ejercito.mil.ar",
+    "from": "ricardo.paz@ejercito.mil.ar",
+    "reply_to": null,
+    "return_path": "ricardo.paz@ejercito.mil.ar",
+    "saltos": 1,
+    "ips_en_cadena": [
+     "203.0.113.45"
+    ],
+    "x_mailer": null,
+    "freemail": false
+   }
+  },
+  "heuristicas": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "palabras_clave": {
+     "urgencia": [
+      "urgente",
+      "urgent"
+     ],
+     "financiero": [
+      "transferencia",
+      "cbu"
+     ],
+     "institucional": [
+      "estado mayor",
+      "jefatura"
+     ]
+    },
+    "urls_analizadas": 0,
+    "urls_externas": 0,
+    "adjuntos_analizados": 0,
+    "dominios_remitente": [
+     "ejercito.mil.ar"
+    ],
+    "dominios_enlaces": [],
+    "html": false
+   }
+  },
+  "virustotal": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí VT_API_KEY (gratis en virustotal.com) para habilitar esta fuente",
+   "resultados": {
+    "ips": {},
+    "dominios": {},
+    "urls": {},
+    "hashes": {},
+    "errores": []
+   }
+  },
+  "abuseipdb": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSEIPDB_API_KEY (gratis, 1000 checks/día) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "crtsh": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "rdap": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "urlhaus": {
+   "estado": "sin_api_key",
+   "consultas": 1,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch)",
+   "resultados": {
+    "urls": {},
+    "hosts": {
+     "203.0.113.45": {
+      "estado": "error",
+      "http": 401
+     }
+    }
+   }
+  },
+  "malwarebazaar": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "threatfox": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "dns": {
+   "estado": "ok",
+   "consultas": 4,
+   "resultados": {
+    "ejercito.mil.ar": {
+     "rol": "remitente",
+     "existe": true,
+     "mx": [
+      "7 mx4.ejercito.mil.ar."
+     ],
+     "spf": "v=spf1 a mx ip4:179.51.212.118 -all",
+     "dmarc": "v=DMARC1; p=reject; rua=mailto:secsistemas@ejercito.mil.ar; ruf=mailto:secsistemas@ejercito.mil.ar; pct=100; adkim=s; aspf=s",
+     "politica_dmarc": "reject",
+     "a": []
+    }
+   }
+  },
+  "agente_identidad": {
+   "estado": "ok",
+   "consultas": 5,
+   "nota": null,
+   "resultados": {
+    "analisis_id": "a1-5f65ca726fcb",
+    "version": "1.0.0",
+    "objetivo_cumplido": true,
+    "conclusion": "SUPLANTACION_CONFIRMADA",
+    "motivo_conclusion": "no pasa ni SPF (fail para ejercito.mil.ar) ni DKIM (el correo no está firmado) alineados con ejercito.mil.ar",
+    "remitente": "ricardo.paz@ejercito.mil.ar",
+    "dominio_propio": true,
+    "origen": {
+     "ip": "203.0.113.45",
+     "mx": "mx4.ejercito.mil.ar",
+     "confiable": true,
+     "motivo": "IP que entregó el correo a mx4.ejercito.mil.ar",
+     "indice_received": 0
+    },
+    "autenticacion_declarada": {
+     "spf": "pass",
+     "dkim": "pass",
+     "dmarc": "pass",
+     "dkim_dominio": "ejercito.mil.ar"
+    },
+    "authentication_results": [
+     {
+      "authserv_id": "mx4.ejercito.mil.ar",
+      "spf": "pass",
+      "dkim": "pass",
+      "dmarc": "pass",
+      "confiable": true
+     }
+    ],
+    "spf_recalculado": {
+     "resultado": "fail",
+     "dominio": "ejercito.mil.ar",
+     "ip": "203.0.113.45",
+     "registro": "v=spf1 a mx ip4:179.51.212.118 -all",
+     "mecanismo": "-all",
+     "consultas": 2,
+     "detalle": "",
+     "notas": []
+    },
+    "dkim_verificado": [],
+    "politica_dmarc": {
+     "p": "reject",
+     "sp": null,
+     "adkim": "s",
+     "aspf": "s",
+     "pct": 100,
+     "registro": "v=DMARC1; p=reject; rua=mailto:secsistemas@ejercito.mil.ar; ruf=mailto:secsistemas@ejercito.mil.ar; pct=100; adkim=s; aspf=s",
+     "dominio_registro": "ejercito.mil.ar"
+    },
+    "dmarc_recalculado": {
+     "resultado": "fail",
+     "politica": "reject",
+     "alineacion_spf": false,
+     "alineacion_dkim": false,
+     "detalle": "no pasa ni SPF (fail para ejercito.mil.ar) ni DKIM (el correo no está firmado) alineados con ejercito.mil.ar"
+    },
+    "relacion": {
+     "primer_contacto": true,
+     "contactos_previos": 0
+    },
+    "bec": {
+     "autoridad": [
+      "Cnel. Ricardo",
+      "Jefatura",
+      "Estado Mayor"
+     ],
+     "cbu": [
+      "017…7370"
+     ],
+     "cvu": [],
+     "alias": [],
+     "montos": [
+      "$2.850.000"
+     ],
+     "transferencia": true,
+     "urgencia_secreto": [
+      "confidencial",
+      "estoy en reunión",
+      "hoy mismo",
+      "no lo comentes",
+      "no puedo atender",
+      "reservada",
+      "urgente"
+     ],
+     "destinos_hash": [
+      "648acab5417d0074"
+     ],
+     "instruccion_pago": true
+    },
+    "degradado": [],
+    "pasos": [
+     {
+      "n": 1,
+      "accion": "identificar_origen",
+      "ms": 0.1
+     },
+     {
+      "n": 2,
+      "accion": "consultar_politica_dmarc",
+      "ms": 0.1
+     },
+     {
+      "n": 3,
+      "accion": "recalcular_spf",
+      "ms": 0.2
+     },
+     {
+      "n": 4,
+      "accion": "evaluar_dmarc",
+      "ms": 0
+     },
+     {
+      "n": 5,
+      "accion": "concluir_identidad",
+      "ms": 0
+     },
+     {
+      "n": 6,
+      "accion": "consultar_relacion",
+      "ms": 0
+     },
+     {
+      "n": 7,
+      "accion": "evaluar_patron_bec",
+      "ms": 0.4
+     }
+    ],
+    "duracion_ms": 1.1
+   }
+  }
+ },
+ "fuentes_ok": [
+  "cabeceras",
+  "heuristicas",
+  "dns",
+  "agente_identidad"
+ ],
+ "fuentes_sin_key": [
+  "virustotal",
+  "abuseipdb",
+  "urlhaus",
+  "threatfox"
+ ],
+ "fuentes_error": [],
+ "ia": {
+  "disponible": false,
+  "modelo": "llama3.2:3b",
+  "error": "connect ECONNREFUSED 127.0.0.1:11434",
+  "veredicto": null,
+  "confianza": null,
+  "tipo_amenaza": null,
+  "resumen": null,
+  "indicadores_clave": [],
+  "acciones_recomendadas": [],
+  "mitre_attack": [
+   "T1566 Phishing"
+  ],
+  "mensaje_para_usuario": null,
+  "duracion_ms": null
+ },
+ "veredicto_final": "VERDADERO_POSITIVO",
+ "accion": "CUARENTENA_Y_ALERTA",
+ "motivo_veredicto": [
+  "IA no disponible (connect ECONNREFUSED 127.0.0.1:11434): se usa el veredicto del motor de reglas"
+ ],
+ "resumen_ejecutivo": {
+  "report_id": "20260916211200-bnzp5l",
+  "veredicto": "VERDADERO_POSITIVO",
+  "accion": "CUARENTENA_Y_ALERTA",
+  "score": 100,
+  "nivel": "CRITICO",
+  "de": "ricardo.paz@ejercito.mil.ar",
+  "asunto": "Pedido reservado",
+  "hallazgos_criticos_altos": 5,
+  "ia_resumen": null,
+  "ia_confianza": null,
+  "mitre": [
+   "T1566 Phishing"
+  ],
+  "fuentes_ok": [
+   "cabeceras",
+   "heuristicas",
+   "dns",
+   "agente_identidad"
+  ]
+ }
+}

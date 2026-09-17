@@ -1,0 +1,78 @@
+{
+ "tipo": "experimento controlado con población sintética",
+ "generado_en": "2026-09-16T21:15:05.836258+00:00",
+ "parametros": {
+  "n": 800,
+  "semilla": 11,
+  "repeticiones": 40,
+  "vigentes": [
+   30,
+   65
+  ],
+  "costos": {
+   "falso_negativo": 20,
+   "falso_positivo": 1,
+   "escalar": 0.2
+  }
+ },
+ "poblacion": {
+  "maliciosos": 241,
+  "total": 800
+ },
+ "curva": [
+  {
+   "n_entrenamiento": 10,
+   "repeticiones": 40,
+   "costo_reservado_propuesto": 0.668,
+   "desvio_propuesto": 0.4708,
+   "costo_reservado_vigente": 0.5093,
+   "mejora_media": -0.1587,
+   "proporcion_no_peor": 0.5
+  },
+  {
+   "n_entrenamiento": 20,
+   "repeticiones": 40,
+   "costo_reservado_propuesto": 0.7609,
+   "desvio_propuesto": 0.5655,
+   "costo_reservado_vigente": 0.5159,
+   "mejora_media": -0.245,
+   "proporcion_no_peor": 0.5
+  },
+  {
+   "n_entrenamiento": 40,
+   "repeticiones": 40,
+   "costo_reservado_propuesto": 0.3596,
+   "desvio_propuesto": 0.3192,
+   "costo_reservado_vigente": 0.5037,
+   "mejora_media": 0.1441,
+   "proporcion_no_peor": 0.825
+  },
+  {
+   "n_entrenamiento": 80,
+   "repeticiones": 40,
+   "costo_reservado_propuesto": 0.2723,
+   "desvio_propuesto": 0.258,
+   "costo_reservado_vigente": 0.5111,
+   "mejora_media": 0.2387,
+   "proporcion_no_peor": 0.9
+  },
+  {
+   "n_entrenamiento": 160,
+   "repeticiones": 40,
+   "costo_reservado_propuesto": 0.1834,
+   "desvio_propuesto": 0.1575,
+   "costo_reservado_vigente": 0.5234,
+   "mejora_media": 0.3399,
+   "proporcion_no_peor": 0.975
+  },
+  {
+   "n_entrenamiento": 320,
+   "repeticiones": 40,
+   "costo_reservado_propuesto": 0.1031,
+   "desvio_propuesto": 0.0735,
+   "costo_reservado_vigente": 0.5161,
+   "mejora_media": 0.413,
+   "proporcion_no_peor": 1.0
+  }
+ ]
+}
