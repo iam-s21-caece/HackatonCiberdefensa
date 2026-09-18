@@ -1,0 +1,14 @@
+# Unificado: flujo n8n (CENTINELA) + agentes (1AgenteModelosObjetivos, 2AgenteAprendizaje, interfaz)
+.venv/
+.env
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+# Salidas del flujo (se generan al correr): la estructura de carpetas sí se versiona
+data/reports/*.json
+data/bitacora/*.jsonl
+# Evidencias de verificar_e2e.sh: cada corrida es local. Para publicar una corrida de referencia:
+#   git add -f evidencias/<corrida>
+evidencias/*
+!evidencias/README.md

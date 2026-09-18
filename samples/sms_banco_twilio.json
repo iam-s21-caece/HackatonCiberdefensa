@@ -1,0 +1,11 @@
+{
+  "SmsMessageSid": "SM9f1c2a7e4b3d4c5e8f6a7b8c9d0e1f2a",
+  "MessageSid": "SM9f1c2a7e4b3d4c5e8f6a7b8c9d0e1f2a",
+  "AccountSid": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "From": "BancoNacion",
+  "To": "+5493815550100",
+  "Body": "BNA: Su cuenta fue BLOQUEADA por movimientos inusuales. Reactive su acceso ingresando usuario y clave en http://bna-seguridad-online.com/reactivar o sera dada de baja definitivamente en 48 horas.",
+  "NumMedia": "0",
+  "SmsStatus": "received",
+  "ApiVersion": "2010-04-01"
+}

@@ -1,0 +1,329 @@
+{
+ "report_id": "20260916211901-ap6257",
+ "recibido_en": "2026-09-16T21:19:01.422Z",
+ "origen_entrada": "eml_crudo",
+ "notas_parser": [],
+ "config": {
+  "vt_api_key": "",
+  "abuseipdb_api_key": "",
+  "abusech_api_key": "",
+  "ollama_url": "http://ollama:11434",
+  "ollama_model": "llama3.2:3b",
+  "dominios_propios": [
+   "ejercito.mil.ar",
+   "argentina.gob.ar",
+   "mil.ar"
+  ],
+  "soc_webhook_url": ""
+ },
+ "correo": {
+  "de": {
+   "raw": "\"Gral. Martín Sosa - Dirección de Finanzas\" <martin.sosa@ejercito.mil.ar>",
+   "nombre": "Gral. Martín Sosa - Dirección de Finanzas",
+   "direccion": "martin.sosa@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "reply_to": {
+   "raw": "",
+   "nombre": "",
+   "direccion": "",
+   "dominio": "",
+   "dominio_registrable": ""
+  },
+  "return_path": {
+   "raw": "<martin.sosa@ejercito.mil.ar>",
+   "nombre": "",
+   "direccion": "martin.sosa@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "para": "<tesoreria.logistica@ejercito.mil.ar>",
+  "asunto": "Pago urgente a proveedor",
+  "fecha": "Thu, 17 Sep 2026 09:40:11 -0300",
+  "message_id": "<c77e0b14@srv-notif.net>",
+  "auth": {
+   "spf": "ausente",
+   "dkim": "ausente",
+   "dmarc": "ausente",
+   "dkim_dominio": null
+  },
+  "saltos": 1,
+  "cuerpo_muestra": "Buenos días. Necesito que hoy mismo se abone $1.270.000 a un proveedor por una adquisición reservada.\nTransferir al CBU 0170-0992-2000-0067-7973-70 y enviarme el comprobante por este medio.\nEs confidencial, no lo comentes con nadie. Estoy en una reunión y no puedo atender llamadas.\n\nGral. Martín Sosa\nDirección de Finanzas"
+ },
+ "artefactos": {
+  "ips": [
+   "203.0.113.45"
+  ],
+  "dominios": [
+   "ejercito.mil.ar"
+  ],
+  "urls": [],
+  "adjuntos": [],
+  "hashes": []
+ },
+ "iocs_defanged": {
+  "remitente": "martin[.]sosa@ejercito[.]mil[.]ar",
+  "reply_to": null,
+  "ips": [
+   "203[.]0[.]113[.]45"
+  ],
+  "dominios": [
+   "ejercito[.]mil[.]ar"
+  ],
+  "urls": [],
+  "adjuntos": []
+ },
+ "score": 41,
+ "nivel": "MEDIO",
+ "veredicto_reglas": "ESCALAR",
+ "reglas_duras": [],
+ "score_por_categoria": {
+  "ingenieria_social": 17,
+  "autenticacion": 14,
+  "cabeceras": 10,
+  "dns": 0
+ },
+ "hallazgos": [
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_urgencia",
+   "valor": "urgente, urgent",
+   "severidad": "media",
+   "peso": 10,
+   "detalle": "Lenguaje de urgencia (2 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_financiero",
+   "valor": "cbu",
+   "severidad": "media",
+   "peso": 10,
+   "detalle": "Lenguaje de financiero (1 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "spf_ausente",
+   "valor": "ausente",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "Sin verificación SPF disponible para el dominio remitente",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dkim_ausente",
+   "valor": "ausente",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "El mensaje no está firmado con DKIM",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "fecha_futura",
+   "valor": "Thu, 17 Sep 2026 09:40:11 -0300",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "Fecha del mensaje en el futuro",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "message_id_dominio_distinto",
+   "valor": "<c77e0b14@srv-notif.net>",
+   "severidad": "baja",
+   "peso": 5,
+   "detalle": "Message-ID generado en srv-notif.net, no en el dominio del From",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dmarc_ausente",
+   "valor": "ausente",
+   "severidad": "baja",
+   "peso": 4,
+   "detalle": "Sin evaluación DMARC",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "dns",
+   "tipo": "dominio_propio_protegido",
+   "valor": "ejercito.mil.ar",
+   "severidad": "info",
+   "peso": 0,
+   "detalle": "Dominio propio con SPF/DMARC publicados",
+   "fuente": "dns"
+  }
+ ],
+ "n_hallazgos": 8,
+ "fuentes": {
+  "cabeceras": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "spf": "ausente",
+    "dkim": "ausente",
+    "dmarc": "ausente",
+    "dkim_dominio": null,
+    "from": "martin.sosa@ejercito.mil.ar",
+    "reply_to": null,
+    "return_path": "martin.sosa@ejercito.mil.ar",
+    "saltos": 1,
+    "ips_en_cadena": [
+     "203.0.113.45"
+    ],
+    "x_mailer": null,
+    "freemail": false
+   }
+  },
+  "heuristicas": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "palabras_clave": {
+     "urgencia": [
+      "urgente",
+      "urgent"
+     ],
+     "financiero": [
+      "cbu"
+     ]
+    },
+    "urls_analizadas": 0,
+    "urls_externas": 0,
+    "adjuntos_analizados": 0,
+    "dominios_remitente": [
+     "ejercito.mil.ar"
+    ],
+    "dominios_enlaces": [],
+    "html": false
+   }
+  },
+  "virustotal": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí VT_API_KEY (gratis en virustotal.com) para habilitar esta fuente",
+   "resultados": {
+    "ips": {},
+    "dominios": {},
+    "urls": {},
+    "hashes": {},
+    "errores": []
+   }
+  },
+  "abuseipdb": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSEIPDB_API_KEY (gratis, 1000 checks/día) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "crtsh": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "rdap": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "urlhaus": {
+   "estado": "sin_api_key",
+   "consultas": 1,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch)",
+   "resultados": {
+    "urls": {},
+    "hosts": {
+     "203.0.113.45": {
+      "estado": "error",
+      "http": 401
+     }
+    }
+   }
+  },
+  "malwarebazaar": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "threatfox": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "dns": {
+   "estado": "ok",
+   "consultas": 4,
+   "resultados": {
+    "ejercito.mil.ar": {
+     "rol": "remitente",
+     "existe": true,
+     "mx": [
+      "7 mx4.ejercito.mil.ar."
+     ],
+     "spf": "v=spf1 a mx ip4:179.51.212.118 -all",
+     "dmarc": "v=DMARC1; p=reject; rua=mailto:secsistemas@ejercito.mil.ar; ruf=mailto:secsistemas@ejercito.mil.ar; pct=100; adkim=s; aspf=s",
+     "politica_dmarc": "reject",
+     "a": []
+    }
+   }
+  }
+ },
+ "fuentes_ok": [
+  "cabeceras",
+  "heuristicas",
+  "dns"
+ ],
+ "fuentes_sin_key": [
+  "virustotal",
+  "abuseipdb",
+  "urlhaus",
+  "threatfox"
+ ],
+ "fuentes_error": [],
+ "ia": {
+  "disponible": false,
+  "modelo": "llama3.2:3b",
+  "error": "connect ECONNREFUSED 127.0.0.1:11434",
+  "veredicto": null,
+  "confianza": null,
+  "tipo_amenaza": null,
+  "resumen": null,
+  "indicadores_clave": [],
+  "acciones_recomendadas": [],
+  "mitre_attack": [
+   "T1566 Phishing"
+  ],
+  "mensaje_para_usuario": null,
+  "duracion_ms": null
+ },
+ "veredicto_final": "ESCALAR",
+ "accion": "COLA_INVESTIGADOR",
+ "motivo_veredicto": [
+  "IA no disponible (connect ECONNREFUSED 127.0.0.1:11434): se usa el veredicto del motor de reglas"
+ ],
+ "resumen_ejecutivo": {
+  "report_id": "20260916211901-ap6257",
+  "veredicto": "ESCALAR",
+  "accion": "COLA_INVESTIGADOR",
+  "score": 41,
+  "nivel": "MEDIO",
+  "de": "martin.sosa@ejercito.mil.ar",
+  "asunto": "Pago urgente a proveedor",
+  "hallazgos_criticos_altos": 0,
+  "ia_resumen": null,
+  "ia_confianza": null,
+  "mitre": [
+   "T1566 Phishing"
+  ],
+  "fuentes_ok": [
+   "cabeceras",
+   "heuristicas",
+   "dns"
+  ]
+ }
+}

@@ -1,0 +1,628 @@
+{
+ "report_id": "20260916212206-985tt2",
+ "recibido_en": "2026-09-16T21:22:06.555Z",
+ "origen_entrada": "eml_crudo",
+ "notas_parser": [],
+ "config": {
+  "vt_api_key": "",
+  "abuseipdb_api_key": "",
+  "abusech_api_key": "",
+  "ollama_url": "http://ollama:11434",
+  "ollama_model": "llama3.2:3b",
+  "dominios_propios": [
+   "ejercito.mil.ar",
+   "argentina.gob.ar",
+   "mil.ar"
+  ],
+  "soc_webhook_url": ""
+ },
+ "correo": {
+  "de": {
+   "raw": "\"Microsoft 365\" <no-reply@o365-soporte.top>",
+   "nombre": "Microsoft 365",
+   "direccion": "no-reply@o365-soporte.top",
+   "dominio": "o365-soporte.top",
+   "dominio_registrable": "o365-soporte.top"
+  },
+  "reply_to": {
+   "raw": "",
+   "nombre": "",
+   "direccion": "",
+   "dominio": "",
+   "dominio_registrable": ""
+  },
+  "return_path": {
+   "raw": "<no-reply@o365-soporte.top>",
+   "nombre": "",
+   "direccion": "no-reply@o365-soporte.top",
+   "dominio": "o365-soporte.top",
+   "dominio_registrable": "o365-soporte.top"
+  },
+  "para": "<personal@ejercito.mil.ar>",
+  "asunto": "Tu contraseña vence hoy: acción requerida",
+  "fecha": "Thu, 17 Sep 2026 10:05:33 -0300",
+  "message_id": "<m365-7781@o365-soporte.top>",
+  "auth": {
+   "spf": "ausente",
+   "dkim": "ausente",
+   "dmarc": "ausente",
+   "dkim_dominio": null
+  },
+  "saltos": 1,
+  "cuerpo_muestra": "Tu contraseña de Microsoft 365 vence hoy.\n Para no perder el acceso al correo, confirmá tus credenciales de forma urgente:\n https://outlook.office365.com/owa"
+ },
+ "artefactos": {
+  "ips": [
+   "192.0.2.99"
+  ],
+  "dominios": [
+   "o365-soporte.top",
+   "login-m365-ejercito.top",
+   "office365.com"
+  ],
+  "urls": [
+   {
+    "url": "https://login-m365-ejercito.top/owa/auth.html",
+    "host": "login-m365-ejercito.top",
+    "dominio": "login-m365-ejercito.top",
+    "es_ip": false,
+    "texto_ancla": "https://outlook.office365.com/owa"
+   },
+   {
+    "url": "https://outlook.office365.com/owa",
+    "host": "outlook.office365.com",
+    "dominio": "office365.com",
+    "es_ip": false,
+    "texto_ancla": ""
+   }
+  ],
+  "adjuntos": [],
+  "hashes": []
+ },
+ "iocs_defanged": {
+  "remitente": "no-reply@o365-soporte[.]top",
+  "reply_to": null,
+  "ips": [
+   "192[.]0[.]2[.]99"
+  ],
+  "dominios": [
+   "o365-soporte[.]top",
+   "login-m365-ejercito[.]top",
+   "office365[.]com"
+  ],
+  "urls": [
+   "hxxps://login-m365-ejercito[.]top/owa/auth[.]html",
+   "hxxps://outlook[.]office365[.]com/owa"
+  ],
+  "adjuntos": []
+ },
+ "score": 100,
+ "nivel": "CRITICO",
+ "veredicto_reglas": "VERDADERO_POSITIVO",
+ "reglas_duras": [
+  "remitente_inexistente"
+ ],
+ "score_por_categoria": {
+  "dns": 34,
+  "url": 30,
+  "lookalike": 18,
+  "ingenieria_social": 30,
+  "identidad": 12,
+  "autenticacion": 14,
+  "infraestructura": 18,
+  "cabeceras": 6
+ },
+ "hallazgos": [
+  {
+   "categoria": "dns",
+   "tipo": "dominio_inexistente",
+   "valor": "o365-soporte.top",
+   "severidad": "critica",
+   "peso": 30,
+   "detalle": "El dominio remitente no existe en DNS (NXDOMAIN): dirección falsa",
+   "fuente": "dns"
+  },
+  {
+   "categoria": "url",
+   "tipo": "ancla_enganosa",
+   "valor": "\"https://outlook.office365.com/owa\" -> https://login-m365-ejercito.top/owa/auth.html",
+   "severidad": "alta",
+   "peso": 20,
+   "detalle": "El texto del enlace muestra outlook.office365.com pero apunta a login-m365-ejercito.top",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "lookalike",
+   "tipo": "dominio_propio_embebido",
+   "valor": "login-m365-ejercito.top",
+   "severidad": "alta",
+   "peso": 18,
+   "detalle": "enlace: contiene el nombre institucional \"ejercito\" en un dominio ajeno",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_credenciales",
+   "valor": "contraseña",
+   "severidad": "alta",
+   "peso": 14,
+   "detalle": "Lenguaje de credenciales (1 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "combo_credenciales_urgencia",
+   "valor": "",
+   "severidad": "alta",
+   "peso": 12,
+   "detalle": "Pide credenciales/verificación bajo presión de tiempo: patrón clásico de phishing",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_urgencia",
+   "valor": "urgente, vence hoy, acción requerida, urgent",
+   "severidad": "media",
+   "peso": 14,
+   "detalle": "Lenguaje de urgencia (4 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "identidad",
+   "tipo": "nombre_marca_dominio_ajeno",
+   "valor": "Microsoft 365 <no-reply@o365-soporte.top>",
+   "severidad": "media",
+   "peso": 12,
+   "detalle": "El nombre visible invoca \"microsoft\" pero el dominio real es o365-soporte.top",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "spf_ausente",
+   "valor": "ausente",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "Sin verificación SPF disponible para el dominio remitente",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "url",
+   "tipo": "tld_sospechoso",
+   "valor": "https://login-m365-ejercito.top/owa/auth.html",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "TLD .top con alta tasa de abuso",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "url",
+   "tipo": "palabras_phishing_en_url",
+   "valor": "https://login-m365-ejercito.top/owa/auth.html",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "Palabras típicas de captura de credenciales en la URL",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "infraestructura",
+   "tipo": "sin_certificados",
+   "valor": "o365-soporte.top",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "El dominio no tiene certificados TLS registrados en CT: sin sitio HTTPS legítimo conocido",
+   "fuente": "crtsh"
+  },
+  {
+   "categoria": "infraestructura",
+   "tipo": "dominio_sin_registro",
+   "valor": "o365-soporte.top",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "El dominio no aparece registrado (o su TLD no publica RDAP)",
+   "fuente": "rdap"
+  },
+  {
+   "categoria": "infraestructura",
+   "tipo": "dominio_sin_registro",
+   "valor": "login-m365-ejercito.top",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "El dominio no aparece registrado (o su TLD no publica RDAP)",
+   "fuente": "rdap"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dkim_ausente",
+   "valor": "ausente",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "El mensaje no está firmado con DKIM",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "fecha_futura",
+   "valor": "Thu, 17 Sep 2026 10:05:33 -0300",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "Fecha del mensaje en el futuro",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "dns",
+   "tipo": "enlace_no_resuelve",
+   "valor": "login-m365-ejercito.top",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "Dominio del enlace no resuelve (campaña desmontada o aún no activa)",
+   "fuente": "dns"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dmarc_ausente",
+   "valor": "ausente",
+   "severidad": "baja",
+   "peso": 4,
+   "detalle": "Sin evaluación DMARC",
+   "fuente": "cabeceras"
+  }
+ ],
+ "n_hallazgos": 17,
+ "fuentes": {
+  "cabeceras": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "spf": "ausente",
+    "dkim": "ausente",
+    "dmarc": "ausente",
+    "dkim_dominio": null,
+    "from": "no-reply@o365-soporte.top",
+    "reply_to": null,
+    "return_path": "no-reply@o365-soporte.top",
+    "saltos": 1,
+    "ips_en_cadena": [
+     "192.0.2.99"
+    ],
+    "x_mailer": null,
+    "freemail": false
+   }
+  },
+  "heuristicas": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "palabras_clave": {
+     "urgencia": [
+      "urgente",
+      "vence hoy",
+      "acción requerida",
+      "urgent"
+     ],
+     "credenciales": [
+      "contraseña"
+     ]
+    },
+    "urls_analizadas": 2,
+    "urls_externas": 2,
+    "adjuntos_analizados": 0,
+    "dominios_remitente": [
+     "o365-soporte.top"
+    ],
+    "dominios_enlaces": [
+     "login-m365-ejercito.top",
+     "office365.com"
+    ],
+    "html": true
+   }
+  },
+  "virustotal": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí VT_API_KEY (gratis en virustotal.com) para habilitar esta fuente",
+   "resultados": {
+    "ips": {},
+    "dominios": {},
+    "urls": {},
+    "hashes": {},
+    "errores": []
+   }
+  },
+  "abuseipdb": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSEIPDB_API_KEY (gratis, 1000 checks/día) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "crtsh": {
+   "estado": "ok",
+   "consultas": 3,
+   "resultados": {
+    "o365-soporte.top": {
+     "estado": "ok",
+     "certificados": 0,
+     "primer_certificado": null,
+     "ultimo_certificado": null,
+     "dias_desde_primero": null,
+     "nombres_vistos": [],
+     "emisores": []
+    },
+    "login-m365-ejercito.top": {
+     "estado": "error",
+     "http": 502
+    },
+    "office365.com": {
+     "estado": "timeout",
+     "http": 0
+    }
+   }
+  },
+  "rdap": {
+   "estado": "ok",
+   "consultas": 3,
+   "resultados": {
+    "o365-soporte.top": {
+     "estado": "no_registrado_o_sin_rdap"
+    },
+    "login-m365-ejercito.top": {
+     "estado": "no_registrado_o_sin_rdap"
+    },
+    "office365.com": {
+     "estado": "ok",
+     "registrado": "2005-06-20T18:10:48Z",
+     "dias_desde_registro": 7758,
+     "expira": "2027-06-20T18:10:48Z",
+     "dias_hasta_expirar": 277,
+     "ultimo_cambio": "2026-05-19T12:33:29Z",
+     "estados": [
+      "client delete prohibited",
+      "client transfer prohibited",
+      "client update prohibited",
+      "server delete prohibited",
+      "server transfer prohibited",
+      "server update prohibited"
+     ],
+     "registrador": "MarkMonitor Inc.",
+     "nameservers": [
+      "NS1-07.AZURE-DNS.COM",
+      "NS2-07.AZURE-DNS.NET",
+      "NS3-07.AZURE-DNS.ORG",
+      "NS4-07.AZURE-DNS.INFO"
+     ]
+    }
+   }
+  },
+  "urlhaus": {
+   "estado": "sin_api_key",
+   "consultas": 5,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch)",
+   "resultados": {
+    "urls": {
+     "https://login-m365-ejercito.top/owa/auth.html": {
+      "estado": "error",
+      "http": 401
+     },
+     "https://outlook.office365.com/owa": {
+      "estado": "error",
+      "http": 401
+     }
+    },
+    "hosts": {
+     "login-m365-ejercito.top": {
+      "estado": "error",
+      "http": 401
+     },
+     "outlook.office365.com": {
+      "estado": "error",
+      "http": 401
+     },
+     "192.0.2.99": {
+      "estado": "error",
+      "http": 401
+     }
+    }
+   }
+  },
+  "malwarebazaar": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "threatfox": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "dns": {
+   "estado": "ok",
+   "consultas": 6,
+   "resultados": {
+    "o365-soporte.top": {
+     "rol": "remitente",
+     "existe": false,
+     "mx": [],
+     "spf": null,
+     "dmarc": null,
+     "politica_dmarc": null,
+     "a": []
+    },
+    "login-m365-ejercito.top": {
+     "rol": "enlace",
+     "existe": false,
+     "a": []
+    },
+    "office365.com": {
+     "rol": "enlace",
+     "existe": true,
+     "a": [
+      "20.119.0.28",
+      "40.112.243.53"
+     ]
+    }
+   }
+  },
+  "agente_identidad": {
+   "estado": "ok",
+   "consultas": 2,
+   "nota": null,
+   "resultados": {
+    "analisis_id": "a1-bd2dfe5f04ad",
+    "version": "1.0.0",
+    "objetivo_cumplido": true,
+    "conclusion": "NO_VERIFICABLE",
+    "motivo_conclusion": "o365-soporte.top no publica DMARC",
+    "remitente": "no-reply@o365-soporte.top",
+    "dominio_propio": false,
+    "origen": {
+     "ip": "192.0.2.99",
+     "mx": "mx4.ejercito.mil.ar",
+     "confiable": true,
+     "motivo": "IP que entregó el correo a mx4.ejercito.mil.ar",
+     "indice_received": 0
+    },
+    "autenticacion_declarada": {
+     "spf": "ausente",
+     "dkim": "ausente",
+     "dmarc": "ausente",
+     "dkim_dominio": null
+    },
+    "authentication_results": [],
+    "spf_recalculado": {
+     "resultado": "none",
+     "dominio": "o365-soporte.top",
+     "ip": "192.0.2.99",
+     "registro": null,
+     "mecanismo": null,
+     "consultas": 0,
+     "detalle": "",
+     "notas": []
+    },
+    "dkim_verificado": [],
+    "politica_dmarc": null,
+    "dmarc_recalculado": {
+     "resultado": "none",
+     "politica": null,
+     "alineacion_spf": false,
+     "alineacion_dkim": false,
+     "detalle": "o365-soporte.top no publica DMARC"
+    },
+    "relacion": {
+     "primer_contacto": true,
+     "contactos_previos": 0
+    },
+    "bec": {
+     "autoridad": [],
+     "cbu": [],
+     "cvu": [],
+     "alias": [],
+     "montos": [],
+     "transferencia": false,
+     "urgencia_secreto": [
+      "urgente"
+     ],
+     "destinos_hash": [],
+     "instruccion_pago": false
+    },
+    "degradado": [],
+    "pasos": [
+     {
+      "n": 1,
+      "accion": "identificar_origen",
+      "ms": 0
+     },
+     {
+      "n": 2,
+      "accion": "consultar_politica_dmarc",
+      "ms": 0
+     },
+     {
+      "n": 3,
+      "accion": "recalcular_spf",
+      "ms": 0
+     },
+     {
+      "n": 4,
+      "accion": "evaluar_dmarc",
+      "ms": 0
+     },
+     {
+      "n": 5,
+      "accion": "concluir_identidad",
+      "ms": 0
+     },
+     {
+      "n": 6,
+      "accion": "consultar_relacion",
+      "ms": 0
+     },
+     {
+      "n": 7,
+      "accion": "evaluar_patron_bec",
+      "ms": 0.1
+     }
+    ],
+    "duracion_ms": 0.3
+   }
+  }
+ },
+ "fuentes_ok": [
+  "cabeceras",
+  "heuristicas",
+  "crtsh",
+  "rdap",
+  "dns",
+  "agente_identidad"
+ ],
+ "fuentes_sin_key": [
+  "virustotal",
+  "abuseipdb",
+  "urlhaus",
+  "threatfox"
+ ],
+ "fuentes_error": [],
+ "ia": {
+  "disponible": false,
+  "modelo": "llama3.2:3b",
+  "error": "connect ECONNREFUSED 127.0.0.1:11434",
+  "veredicto": null,
+  "confianza": null,
+  "tipo_amenaza": null,
+  "resumen": null,
+  "indicadores_clave": [],
+  "acciones_recomendadas": [],
+  "mitre_attack": [
+   "T1566 Phishing"
+  ],
+  "mensaje_para_usuario": null,
+  "duracion_ms": null
+ },
+ "veredicto_final": "VERDADERO_POSITIVO",
+ "accion": "CUARENTENA_Y_ALERTA",
+ "motivo_veredicto": [
+  "IA no disponible (connect ECONNREFUSED 127.0.0.1:11434): se usa el veredicto del motor de reglas"
+ ],
+ "resumen_ejecutivo": {
+  "report_id": "20260916212206-985tt2",
+  "veredicto": "VERDADERO_POSITIVO",
+  "accion": "CUARENTENA_Y_ALERTA",
+  "score": 100,
+  "nivel": "CRITICO",
+  "de": "no-reply@o365-soporte.top",
+  "asunto": "Tu contraseña vence hoy: acción requerida",
+  "hallazgos_criticos_altos": 5,
+  "ia_resumen": null,
+  "ia_confianza": null,
+  "mitre": [
+   "T1566 Phishing"
+  ],
+  "fuentes_ok": [
+   "cabeceras",
+   "heuristicas",
+   "crtsh",
+   "rdap",
+   "dns",
+   "agente_identidad"
+  ]
+ }
+}

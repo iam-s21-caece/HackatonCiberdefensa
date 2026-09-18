@@ -1,0 +1,153 @@
+{
+ "report_id": "20260916202826-mm87ur",
+ "recibido_en": "2026-09-16T20:28:26.149Z",
+ "origen_entrada": "eml_crudo",
+ "notas_parser": [],
+ "config": {
+  "vt_api_key": "",
+  "abuseipdb_api_key": "",
+  "abusech_api_key": "",
+  "ollama_url": "http://ollama:11434",
+  "ollama_model": "llama3.2:3b",
+  "dominios_propios": [
+   "ejercito.mil.ar",
+   "argentina.gob.ar",
+   "mil.ar"
+  ],
+  "soc_webhook_url": ""
+ },
+ "correo": {
+  "from": {
+   "raw": "\"Mercado Pago\" <noreply@notificaciones-mercadopago.online>",
+   "nombre": "Mercado Pago",
+   "direccion": "noreply@notificaciones-mercadopago.online",
+   "dominio": "notificaciones-mercadopago.online",
+   "dominio_registrable": "notificaciones-mercadopago.online"
+  },
+  "reply_to": {
+   "raw": "reembolsos.mp@yandex.com",
+   "nombre": "",
+   "direccion": "reembolsos.mp@yandex.com",
+   "dominio": "yandex.com",
+   "dominio_registrable": "yandex.com"
+  },
+  "return_path": {
+   "raw": "<noreply@notificaciones-mercadopago.online>",
+   "nombre": "",
+   "direccion": "noreply@notificaciones-mercadopago.online",
+   "dominio": "notificaciones-mercadopago.online",
+   "dominio_registrable": "notificaciones-mercadopago.online"
+  },
+  "to": "<sargento.gomez@ejercito.mil.ar>",
+  "subject": "Tenés un reembolso pendiente de $45.900 - acción requerida",
+  "date": "Wed, 16 Sep 2026 10:02:40 -0300",
+  "message_id": "<20260916100240.4411@srv-01.local>",
+  "auth": {
+   "spf": "softfail",
+   "dkim": "ausente",
+   "dmarc": "ausente",
+   "dkim_dominio": null,
+   "raw": "mx4.ejercito.mil.ar; spf=softfail smtp.mailfrom=notificaciones-mercadopago.online"
+  },
+  "received": [
+   {
+    "from": "srv-01.local",
+    "ip": "198.51.100.23",
+    "raw": "from srv-01.local (unknown [198.51.100.23]) by mx4.ejercito.mil.ar (Postfix) with ESMTP id 91AB22CD for <sargento.gomez@ejercito.mil.ar>; Wed, 16 Sep 2026 10:02:44 -0300"
+   }
+  ],
+  "n_saltos": 1,
+  "cabeceras": {
+   "received": [
+    "from srv-01.local (unknown [198.51.100.23]) by mx4.ejercito.mil.ar (Postfix) with ESMTP id 91AB22CD for <sargento.gomez@ejercito.mil.ar>; Wed, 16 Sep 2026 10:02:44 -0300"
+   ],
+   "authentication-results": [
+    "mx4.ejercito.mil.ar; spf=softfail smtp.mailfrom=notificaciones-mercadopago.online"
+   ],
+   "return-path": [
+    "<noreply@notificaciones-mercadopago.online>"
+   ],
+   "from": [
+    "\"Mercado Pago\" <noreply@notificaciones-mercadopago.online>"
+   ],
+   "reply-to": [
+    "reembolsos.mp@yandex.com"
+   ],
+   "to": [
+    "<sargento.gomez@ejercito.mil.ar>"
+   ],
+   "subject": [
+    "=?UTF-8?Q?Ten=C3=A9s_un_reembolso_pendiente_de_$45.900_-_acci=C3=B3n_requerida?="
+   ],
+   "date": [
+    "Wed, 16 Sep 2026 10:02:40 -0300"
+   ],
+   "message-id": [
+    "<20260916100240.4411@srv-01.local>"
+   ],
+   "x-mailer": [
+    "PHPMailer 6.8.0"
+   ],
+   "mime-version": [
+    "1.0"
+   ],
+   "content-type": [
+    "multipart/mixed; boundary=\"MIX-7f3a\""
+   ]
+  },
+  "cuerpo": "Hola, detectamos un pago duplicado. Tenés un reembolso de $45.900 pendiente.\n Para recibirlo, ingresá urgente con tu usuario y contraseña antes de 24 horas:\n https://www.mercadopago.com.ar/reembolsos \n Adjuntamos el comprobante.",
+  "html_presente": true,
+  "html_muestra": "<html><body><p>Hola, detectamos un pago duplicado. Tenés un reembolso de <b>$45.900</b> pendiente.</p>\n<p>Para recibirlo, ingresá urgente con tu usuario y contraseña antes de 24 horas:\n<a href=\"http://mercadopago-reembolsos.click/login?reintegro=45900\">https://www.mercadopago.com.ar/reembolsos</a></p>\n<p>Adjuntamos el comprobante.</p></body></html>\n",
+  "correos_anidados": 0
+ },
+ "artefactos": {
+  "ips": [
+   "198.51.100.23"
+  ],
+  "dominios": [
+   "notificaciones-mercadopago.online",
+   "yandex.com",
+   "mercadopago-reembolsos.click",
+   "mercadopago.com.ar"
+  ],
+  "urls": [
+   {
+    "url": "http://mercadopago-reembolsos.click/login?reintegro=45900",
+    "host": "mercadopago-reembolsos.click",
+    "dominio": "mercadopago-reembolsos.click",
+    "es_ip": false,
+    "texto_ancla": "https://www.mercadopago.com.ar/reembolsos"
+   },
+   {
+    "url": "https://www.mercadopago.com.ar/reembolsos",
+    "host": "www.mercadopago.com.ar",
+    "dominio": "mercadopago.com.ar",
+    "es_ip": false,
+    "texto_ancla": ""
+   }
+  ],
+  "adjuntos": [
+   {
+    "nombre": "Comprobante_Reembolso.pdf.exe",
+    "mime": "application/octet-stream",
+    "tamano": 56,
+    "sha256": "9defe8e1a755728d98b8cbd115cf892b2e95256521400f2df79ad39877e45ed2",
+    "md5": "06a03e4262fe7b4b45fd7972a32a4eb6",
+    "content_id": null,
+    "inline": false,
+    "ext": "exe",
+    "doble_extension": "pdf.exe"
+   }
+  ],
+  "hashes": [
+   "9defe8e1a755728d98b8cbd115cf892b2e95256521400f2df79ad39877e45ed2"
+  ]
+ },
+ "resumen_artefactos": {
+  "ips": 1,
+  "dominios": 4,
+  "urls": 2,
+  "adjuntos": 1,
+  "hashes": 1
+ }
+}

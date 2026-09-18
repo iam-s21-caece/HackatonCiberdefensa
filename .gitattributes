@@ -1,0 +1,8 @@
+# Fin de línea normalizado — RNF-04. Sin esto, un clon en Windows (core.autocrlf=true) convierte a CRLF:
+# los .sh dejan de correr en bash y la clave PEM de prueba del Agente 1 deja de parsear (tests DKIM).
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary

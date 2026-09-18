@@ -1,0 +1,118 @@
+{
+ "report_id": "20260916202825-ym4o78",
+ "recibido_en": "2026-09-16T20:28:25.187Z",
+ "origen_entrada": "eml_crudo",
+ "notas_parser": [],
+ "config": {
+  "vt_api_key": "",
+  "abuseipdb_api_key": "",
+  "abusech_api_key": "",
+  "ollama_url": "http://ollama:11434",
+  "ollama_model": "llama3.2:3b",
+  "dominios_propios": [
+   "ejercito.mil.ar",
+   "argentina.gob.ar",
+   "mil.ar"
+  ],
+  "soc_webhook_url": ""
+ },
+ "correo": {
+  "from": {
+   "raw": "\"Comunicaciones Institucionales\" <comunicaciones@ejercito.mil.ar>",
+   "nombre": "Comunicaciones Institucionales",
+   "direccion": "comunicaciones@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "reply_to": {
+   "raw": "",
+   "nombre": "",
+   "direccion": "",
+   "dominio": "",
+   "dominio_registrable": ""
+  },
+  "return_path": {
+   "raw": "<comunicaciones@ejercito.mil.ar>",
+   "nombre": "",
+   "direccion": "comunicaciones@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "to": "<personal@ejercito.mil.ar>",
+  "subject": "Boletín interno semanal",
+  "date": "Wed, 16 Sep 2026 08:30:00 -0300",
+  "message_id": "<boletin-2026-37@ejercito.mil.ar>",
+  "auth": {
+   "spf": "pass",
+   "dkim": "ausente",
+   "dmarc": "pass",
+   "dkim_dominio": null,
+   "raw": "mx4.ejercito.mil.ar; spf=pass smtp.mailfrom=ejercito.mil.ar; dmarc=pass header.from=ejercito.mil.ar"
+  },
+  "received": [
+   {
+    "from": "correo.ejercito.mil.ar",
+    "ip": "179.51.212.118",
+    "raw": "from correo.ejercito.mil.ar (correo.ejercito.mil.ar [179.51.212.118]) by mx4.ejercito.mil.ar (Postfix) with ESMTPS id 7C2D9E10 for <personal@ejercito.mil.ar>; Wed, 16 Sep 2026 08:30:11 -0300"
+   }
+  ],
+  "n_saltos": 1,
+  "cabeceras": {
+   "authentication-results": [
+    "mx4.ejercito.mil.ar; spf=pass smtp.mailfrom=ejercito.mil.ar; dmarc=pass header.from=ejercito.mil.ar"
+   ],
+   "received": [
+    "from correo.ejercito.mil.ar (correo.ejercito.mil.ar [179.51.212.118]) by mx4.ejercito.mil.ar (Postfix) with ESMTPS id 7C2D9E10 for <personal@ejercito.mil.ar>; Wed, 16 Sep 2026 08:30:11 -0300"
+   ],
+   "return-path": [
+    "<comunicaciones@ejercito.mil.ar>"
+   ],
+   "from": [
+    "\"Comunicaciones Institucionales\" <comunicaciones@ejercito.mil.ar>"
+   ],
+   "to": [
+    "<personal@ejercito.mil.ar>"
+   ],
+   "subject": [
+    "Boletín interno semanal"
+   ],
+   "date": [
+    "Wed, 16 Sep 2026 08:30:00 -0300"
+   ],
+   "message-id": [
+    "<boletin-2026-37@ejercito.mil.ar>"
+   ],
+   "mime-version": [
+    "1.0"
+   ],
+   "content-type": [
+    "text/plain; charset=utf-8"
+   ],
+   "content-transfer-encoding": [
+    "8bit"
+   ]
+  },
+  "cuerpo": "Estimado personal:\nCompartimos las novedades de la semana: cronograma de capacitaciones, actualización del reglamento de licencias y recordatorio del acto del 20 de septiembre.\nSaludos cordiales.\nComunicación Institucional",
+  "html_presente": false,
+  "html_muestra": "",
+  "correos_anidados": 0
+ },
+ "artefactos": {
+  "ips": [
+   "179.51.212.118"
+  ],
+  "dominios": [
+   "ejercito.mil.ar"
+  ],
+  "urls": [],
+  "adjuntos": [],
+  "hashes": []
+ },
+ "resumen_artefactos": {
+  "ips": 1,
+  "dominios": 1,
+  "urls": 0,
+  "adjuntos": 0,
+  "hashes": 0
+ }
+}

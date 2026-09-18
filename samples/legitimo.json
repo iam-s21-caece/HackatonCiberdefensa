@@ -1,0 +1,17 @@
+{
+  "from": "\"Dirección de Comunicación Institucional\" <comunicaciones@ejercito.mil.ar>",
+  "to": "personal@ejercito.mil.ar",
+  "subject": "Boletín semanal: actividades de la semana del 14 de septiembre",
+  "date": "Mon, 14 Sep 2026 08:00:00 -0300",
+  "messageId": "<boletin-2026-37@ejercito.mil.ar>",
+  "headers": {
+    "Received": [
+      "from mail.ejercito.mil.ar (mail.ejercito.mil.ar [179.51.212.118]) by mx4.ejercito.mil.ar with ESMTP id 1Aq2; Mon, 14 Sep 2026 08:00:03 -0300"
+    ],
+    "Authentication-Results": "mx4.ejercito.mil.ar; spf=pass smtp.mailfrom=ejercito.mil.ar; dkim=pass header.d=ejercito.mil.ar; dmarc=pass (p=reject) header.from=ejercito.mil.ar",
+    "List-Unsubscribe": "<mailto:bajas@ejercito.mil.ar>"
+  },
+  "text": "Buenos días,\n\nCompartimos el resumen de actividades institucionales de esta semana:\n\n- Martes 15: ceremonia por el aniversario de la unidad, 10:00 hs, plaza de armas.\n- Jueves 17: charla de concientización en ciberseguridad, auditorio principal, 15:00 hs.\n- Viernes 18: cierre de inscripciones al torneo de fútbol interunidades.\n\nCualquier consulta, responder a este correo.\n\nDirección de Comunicación Institucional",
+  "html": "",
+  "attachments": []
+}

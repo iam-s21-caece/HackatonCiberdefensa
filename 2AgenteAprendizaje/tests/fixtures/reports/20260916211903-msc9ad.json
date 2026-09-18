@@ -1,0 +1,489 @@
+{
+ "report_id": "20260916211903-msc9ad",
+ "recibido_en": "2026-09-16T21:19:03.198Z",
+ "origen_entrada": "eml_crudo",
+ "notas_parser": [],
+ "config": {
+  "vt_api_key": "",
+  "abuseipdb_api_key": "",
+  "abusech_api_key": "",
+  "ollama_url": "http://ollama:11434",
+  "ollama_model": "llama3.2:3b",
+  "dominios_propios": [
+   "ejercito.mil.ar",
+   "argentina.gob.ar",
+   "mil.ar"
+  ],
+  "soc_webhook_url": ""
+ },
+ "correo": {
+  "de": {
+   "raw": "\"Gral. Martín Sosa - Dirección de Finanzas\" <martin.sosa@ejercito.mil.ar>",
+   "nombre": "Gral. Martín Sosa - Dirección de Finanzas",
+   "direccion": "martin.sosa@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "reply_to": {
+   "raw": "",
+   "nombre": "",
+   "direccion": "",
+   "dominio": "",
+   "dominio_registrable": ""
+  },
+  "return_path": {
+   "raw": "<martin.sosa@ejercito.mil.ar>",
+   "nombre": "",
+   "direccion": "martin.sosa@ejercito.mil.ar",
+   "dominio": "ejercito.mil.ar",
+   "dominio_registrable": "ejercito.mil.ar"
+  },
+  "para": "<tesoreria.logistica@ejercito.mil.ar>",
+  "asunto": "Pago urgente a proveedor",
+  "fecha": "Thu, 17 Sep 2026 09:40:11 -0300",
+  "message_id": "<c77e0b14@srv-notif.net>",
+  "auth": {
+   "spf": "ausente",
+   "dkim": "ausente",
+   "dmarc": "ausente",
+   "dkim_dominio": null
+  },
+  "saltos": 1,
+  "cuerpo_muestra": "Buenos días. Necesito que hoy mismo se abone $1.270.000 a un proveedor por una adquisición reservada.\nTransferir al CBU 0170-0992-2000-0067-7973-70 y enviarme el comprobante por este medio.\nEs confidencial, no lo comentes con nadie. Estoy en una reunión y no puedo atender llamadas.\n\nGral. Martín Sosa\nDirección de Finanzas"
+ },
+ "artefactos": {
+  "ips": [
+   "203.0.113.45"
+  ],
+  "dominios": [
+   "ejercito.mil.ar"
+  ],
+  "urls": [],
+  "adjuntos": [],
+  "hashes": []
+ },
+ "iocs_defanged": {
+  "remitente": "martin[.]sosa@ejercito[.]mil[.]ar",
+  "reply_to": null,
+  "ips": [
+   "203[.]0[.]113[.]45"
+  ],
+  "dominios": [
+   "ejercito[.]mil[.]ar"
+  ],
+  "urls": [],
+  "adjuntos": []
+ },
+ "score": 100,
+ "nivel": "CRITICO",
+ "veredicto_reglas": "VERDADERO_POSITIVO",
+ "reglas_duras": [],
+ "score_por_categoria": {
+  "identidad": 40,
+  "contexto": 20,
+  "autenticacion": 40,
+  "ingenieria_social": 17,
+  "cabeceras": 10,
+  "dns": 0
+ },
+ "hallazgos": [
+  {
+   "categoria": "identidad",
+   "tipo": "a1_suplantacion_dominio_propio",
+   "valor": "martin.sosa@ejercito.mil.ar",
+   "severidad": "critica",
+   "peso": 40,
+   "detalle": "El correo dice venir de ejercito.mil.ar, dominio de la organización, pero ni SPF ni DKIM lo respaldan: suplantación verificada del dominio propio.",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "contexto",
+   "tipo": "a1_patron_bec_primer_contacto",
+   "valor": "Gral. Martín",
+   "severidad": "critica",
+   "peso": 20,
+   "detalle": "Se presenta como autoridad (Gral. Martín), da una instrucción de pago y su identidad no está verificada, y es la primera vez que le escribe a este destinatario.",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "a1_dmarc_recalculado_fail_reject",
+   "valor": "ejercito.mil.ar p=reject",
+   "severidad": "alta",
+   "peso": 25,
+   "detalle": "DMARC recalculado falla: no pasa ni SPF (fail para ejercito.mil.ar) ni DKIM (el correo no está firmado) alineados con ejercito.mil.ar. El dueño del dominio pide 'reject' para estos correos.",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "a1_spf_recalculado_fail",
+   "valor": "203.0.113.45 → ejercito.mil.ar",
+   "severidad": "alta",
+   "peso": 20,
+   "detalle": "SPF recalculado: la IP 203.0.113.45 (entregó el correo a mx4.ejercito.mil.ar) no está autorizada por ejercito.mil.ar (v=spf1 a mx ip4:179.51.212.118 -all).",
+   "fuente": "agente_identidad"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_urgencia",
+   "valor": "urgente, urgent",
+   "severidad": "media",
+   "peso": 10,
+   "detalle": "Lenguaje de urgencia (2 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "ingenieria_social",
+   "tipo": "palabras_financiero",
+   "valor": "cbu",
+   "severidad": "media",
+   "peso": 10,
+   "detalle": "Lenguaje de financiero (1 coincidencias)",
+   "fuente": "heuristicas"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "spf_ausente",
+   "valor": "ausente",
+   "severidad": "media",
+   "peso": 8,
+   "detalle": "Sin verificación SPF disponible para el dominio remitente",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dkim_ausente",
+   "valor": "ausente",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "El mensaje no está firmado con DKIM",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "fecha_futura",
+   "valor": "Thu, 17 Sep 2026 09:40:11 -0300",
+   "severidad": "media",
+   "peso": 6,
+   "detalle": "Fecha del mensaje en el futuro",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "cabeceras",
+   "tipo": "message_id_dominio_distinto",
+   "valor": "<c77e0b14@srv-notif.net>",
+   "severidad": "baja",
+   "peso": 5,
+   "detalle": "Message-ID generado en srv-notif.net, no en el dominio del From",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "autenticacion",
+   "tipo": "dmarc_ausente",
+   "valor": "ausente",
+   "severidad": "baja",
+   "peso": 4,
+   "detalle": "Sin evaluación DMARC",
+   "fuente": "cabeceras"
+  },
+  {
+   "categoria": "dns",
+   "tipo": "dominio_propio_protegido",
+   "valor": "ejercito.mil.ar",
+   "severidad": "info",
+   "peso": 0,
+   "detalle": "Dominio propio con SPF/DMARC publicados",
+   "fuente": "dns"
+  }
+ ],
+ "n_hallazgos": 12,
+ "fuentes": {
+  "cabeceras": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "spf": "ausente",
+    "dkim": "ausente",
+    "dmarc": "ausente",
+    "dkim_dominio": null,
+    "from": "martin.sosa@ejercito.mil.ar",
+    "reply_to": null,
+    "return_path": "martin.sosa@ejercito.mil.ar",
+    "saltos": 1,
+    "ips_en_cadena": [
+     "203.0.113.45"
+    ],
+    "x_mailer": null,
+    "freemail": false
+   }
+  },
+  "heuristicas": {
+   "estado": "ok",
+   "consultas": 0,
+   "resultados": {
+    "palabras_clave": {
+     "urgencia": [
+      "urgente",
+      "urgent"
+     ],
+     "financiero": [
+      "cbu"
+     ]
+    },
+    "urls_analizadas": 0,
+    "urls_externas": 0,
+    "adjuntos_analizados": 0,
+    "dominios_remitente": [
+     "ejercito.mil.ar"
+    ],
+    "dominios_enlaces": [],
+    "html": false
+   }
+  },
+  "virustotal": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí VT_API_KEY (gratis en virustotal.com) para habilitar esta fuente",
+   "resultados": {
+    "ips": {},
+    "dominios": {},
+    "urls": {},
+    "hashes": {},
+    "errores": []
+   }
+  },
+  "abuseipdb": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSEIPDB_API_KEY (gratis, 1000 checks/día) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "crtsh": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "rdap": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "urlhaus": {
+   "estado": "sin_api_key",
+   "consultas": 1,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch)",
+   "resultados": {
+    "urls": {},
+    "hosts": {
+     "203.0.113.45": {
+      "estado": "error",
+      "http": 401
+     }
+    }
+   }
+  },
+  "malwarebazaar": {
+   "estado": "sin_artefactos",
+   "consultas": 0,
+   "resultados": {}
+  },
+  "threatfox": {
+   "estado": "sin_api_key",
+   "consultas": 0,
+   "nota": "Definí ABUSECH_API_KEY (gratis en auth.abuse.ch) para habilitar esta fuente",
+   "resultados": {}
+  },
+  "dns": {
+   "estado": "ok",
+   "consultas": 4,
+   "resultados": {
+    "ejercito.mil.ar": {
+     "rol": "remitente",
+     "existe": true,
+     "mx": [
+      "7 mx4.ejercito.mil.ar."
+     ],
+     "spf": "v=spf1 a mx ip4:179.51.212.118 -all",
+     "dmarc": "v=DMARC1; p=reject; rua=mailto:secsistemas@ejercito.mil.ar; ruf=mailto:secsistemas@ejercito.mil.ar; pct=100; adkim=s; aspf=s",
+     "politica_dmarc": "reject",
+     "a": []
+    }
+   }
+  },
+  "agente_identidad": {
+   "estado": "ok",
+   "consultas": 5,
+   "nota": null,
+   "resultados": {
+    "analisis_id": "a1-4ffa6bc94a1e",
+    "version": "1.0.0",
+    "objetivo_cumplido": true,
+    "conclusion": "SUPLANTACION_CONFIRMADA",
+    "motivo_conclusion": "no pasa ni SPF (fail para ejercito.mil.ar) ni DKIM (el correo no está firmado) alineados con ejercito.mil.ar",
+    "remitente": "martin.sosa@ejercito.mil.ar",
+    "dominio_propio": true,
+    "origen": {
+     "ip": "203.0.113.45",
+     "mx": "mx4.ejercito.mil.ar",
+     "confiable": true,
+     "motivo": "IP que entregó el correo a mx4.ejercito.mil.ar",
+     "indice_received": 0
+    },
+    "autenticacion_declarada": {
+     "spf": "ausente",
+     "dkim": "ausente",
+     "dmarc": "ausente",
+     "dkim_dominio": null
+    },
+    "authentication_results": [],
+    "spf_recalculado": {
+     "resultado": "fail",
+     "dominio": "ejercito.mil.ar",
+     "ip": "203.0.113.45",
+     "registro": "v=spf1 a mx ip4:179.51.212.118 -all",
+     "mecanismo": "-all",
+     "consultas": 2,
+     "detalle": "",
+     "notas": []
+    },
+    "dkim_verificado": [],
+    "politica_dmarc": {
+     "p": "reject",
+     "sp": null,
+     "adkim": "s",
+     "aspf": "s",
+     "pct": 100,
+     "registro": "v=DMARC1; p=reject; rua=mailto:secsistemas@ejercito.mil.ar; ruf=mailto:secsistemas@ejercito.mil.ar; pct=100; adkim=s; aspf=s",
+     "dominio_registro": "ejercito.mil.ar"
+    },
+    "dmarc_recalculado": {
+     "resultado": "fail",
+     "politica": "reject",
+     "alineacion_spf": false,
+     "alineacion_dkim": false,
+     "detalle": "no pasa ni SPF (fail para ejercito.mil.ar) ni DKIM (el correo no está firmado) alineados con ejercito.mil.ar"
+    },
+    "relacion": {
+     "primer_contacto": true,
+     "contactos_previos": 0
+    },
+    "bec": {
+     "autoridad": [
+      "Gral. Martín"
+     ],
+     "cbu": [
+      "017…7370"
+     ],
+     "cvu": [],
+     "alias": [],
+     "montos": [
+      "$1.270.000"
+     ],
+     "transferencia": true,
+     "urgencia_secreto": [
+      "confidencial",
+      "estoy en una reunión",
+      "hoy mismo",
+      "no lo comentes",
+      "no puedo atender",
+      "reservada"
+     ],
+     "destinos_hash": [
+      "648acab5417d0074"
+     ],
+     "instruccion_pago": true
+    },
+    "degradado": [],
+    "pasos": [
+     {
+      "n": 1,
+      "accion": "identificar_origen",
+      "ms": 0
+     },
+     {
+      "n": 2,
+      "accion": "consultar_politica_dmarc",
+      "ms": 0
+     },
+     {
+      "n": 3,
+      "accion": "recalcular_spf",
+      "ms": 0.1
+     },
+     {
+      "n": 4,
+      "accion": "evaluar_dmarc",
+      "ms": 0
+     },
+     {
+      "n": 5,
+      "accion": "concluir_identidad",
+      "ms": 0
+     },
+     {
+      "n": 6,
+      "accion": "consultar_relacion",
+      "ms": 0
+     },
+     {
+      "n": 7,
+      "accion": "evaluar_patron_bec",
+      "ms": 0.1
+     }
+    ],
+    "duracion_ms": 0.4
+   }
+  }
+ },
+ "fuentes_ok": [
+  "cabeceras",
+  "heuristicas",
+  "dns",
+  "agente_identidad"
+ ],
+ "fuentes_sin_key": [
+  "virustotal",
+  "abuseipdb",
+  "urlhaus",
+  "threatfox"
+ ],
+ "fuentes_error": [],
+ "ia": {
+  "disponible": true,
+  "modelo": "llama3.2:3b",
+  "error": null,
+  "veredicto": "FALSO_POSITIVO",
+  "confianza": 0.85,
+  "tipo_amenaza": "legitimo",
+  "resumen": "[IA simulada por el harness: legitimo]",
+  "indicadores_clave": [],
+  "acciones_recomendadas": [],
+  "mitre_attack": [],
+  "mensaje_para_usuario": null,
+  "duracion_ms": 118000
+ },
+ "veredicto_final": "ESCALAR",
+ "accion": "COLA_INVESTIGADOR",
+ "motivo_veredicto": [
+  "La IA dijo FALSO_POSITIVO pero el score determinístico es 100: desacuerdo -> revisa un humano"
+ ],
+ "resumen_ejecutivo": {
+  "report_id": "20260916211903-msc9ad",
+  "veredicto": "ESCALAR",
+  "accion": "COLA_INVESTIGADOR",
+  "score": 100,
+  "nivel": "CRITICO",
+  "de": "martin.sosa@ejercito.mil.ar",
+  "asunto": "Pago urgente a proveedor",
+  "hallazgos_criticos_altos": 4,
+  "ia_resumen": "[IA simulada por el harness: legitimo]",
+  "ia_confianza": 0.85,
+  "mitre": [],
+  "fuentes_ok": [
+   "cabeceras",
+   "heuristicas",
+   "dns",
+   "agente_identidad"
+  ]
+ }
+}

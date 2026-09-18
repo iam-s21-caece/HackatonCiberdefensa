@@ -1,0 +1,57 @@
+Return-Path: <noreply@notificaciones-mercadopago.online>
+Received: from mail-relay-03.notificaciones-mercadopago.online (unknown [91.92.250.14])
+	by mx1.ejercito.mil.ar (Postfix) with ESMTP id 4F2a1
+	for <capitan.gomez@ejercito.mil.ar>; Tue, 16 Sep 2026 11:03:12 -0300 (-03)
+Authentication-Results: mx1.ejercito.mil.ar; spf=softfail smtp.mailfrom=notificaciones-mercadopago.online;
+	dkim=none; dmarc=none header.from=notificaciones-mercadopago.online
+From: "Mercado Pago" <noreply@notificaciones-mercadopago.online>
+To: capitan.gomez@ejercito.mil.ar
+Reply-To: cobros.mp2026@yandex.com
+Subject: =?UTF-8?B?VGVuw6lzIHVuIHJlZW1ib2xzbyBwZW5kaWVudGUgZGUgJDQ1LjkwMCAtIGFjY2nDs24gcmVxdWVyaWRh?=
+Date: Tue, 16 Sep 2026 11:03:05 -0300
+Message-ID: <7c1d2e99f4@srv-01.local>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=_centinela_demo_01"
+X-Mailer: PHPMailer 6.9.1
+
+--=_centinela_demo_01
+Content-Type: multipart/alternative; boundary="=_centinela_demo_02"
+
+--=_centinela_demo_02
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hola,
+
+Ten=C3=A9s un reembolso pendiente de $45.900 por una compra cancelada.
+Para acreditarlo en tu cuenta necesitamos que confirmes tus datos de acceso =
+en las pr=C3=B3ximas 48 horas, de lo contrario el dinero ser=C3=A1 devuelto=
+ al comercio.
+
+Confirmar reembolso: https://mercadopago.com.ar/reembolsos
+
+Tambi=C3=A9n adjuntamos el comprobante para tu registro.
+
+Mercado Pago
+
+--=_centinela_demo_02
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html><body><p>Hola,</p><p>Ten=C3=A9s un <b>reembolso pendiente de $45.900<=
+/b> por una compra cancelada.</p><p>Para acreditarlo necesitamos que confir=
+mes tus datos de acceso en las pr=C3=B3ximas <b>48 horas</b>.</p><p><a href=
+=3D"http://mercadopago-reembolsos.click/ar/login?ref=3D8812">https://mercad=
+opago.com.ar/reembolsos</a></p><p>Mercado Pago</p></body></html>
+
+--=_centinela_demo_02--
+
+--=_centinela_demo_01
+Content-Type: application/octet-stream; name="Comprobante_Reembolso_45900.pdf.exe"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Comprobante_Reembolso_45900.pdf.exe"
+
+TVqQAENFTlRJTkVMQSAtIGFyY2hpdm8gZGUgcHJ1ZWJhIElOT0ZFTlNJVk8gKG5vIGVzIG1hbHdh
+cmUgcmVhbCksIHNpbXVsYSB1biBkcm9wcGVyIGNvbiBkb2JsZSBleHRlbnNpb24u
+
+--=_centinela_demo_01--

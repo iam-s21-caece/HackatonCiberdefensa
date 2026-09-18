@@ -1,0 +1,27 @@
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "102290129340398",
+      "changes": [
+        {
+          "field": "messages",
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": { "display_phone_number": "5493815550100", "phone_number_id": "106540352242922" },
+            "contacts": [ { "profile": { "name": "Cap. Martín Gómez" }, "wa_id": "13045550199" } ],
+            "messages": [
+              {
+                "from": "13045550199",
+                "id": "wamid.HBgLMTMwNDU1NTAxOTkVAgASGBQzQTdCMEQ4RjI4QjUxQzM5NEUyQwA=",
+                "timestamp": "1789646400",
+                "type": "text",
+                "text": { "body": "Hola! Soy Martín, cambié de número, guardá este. Perdí el celular y estoy recuperando mi WhatsApp: te va a llegar un código de 6 dígitos a tu número, pasámelo urgente por favor que lo necesito para entrar. Después te explico." }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

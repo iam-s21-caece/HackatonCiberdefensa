@@ -1,0 +1,94 @@
+{
+  "_descripcion": "Hipótesis de la verificación de extremo a extremo (RNF-05, scripts/verificar_e2e.sh). Se definen a partir de la verdad de cada muestra y de las reglas documentadas del flujo y de los agentes, ANTES de correr. 'veredicto_esperado' es el resultado ideal; 'veredictos_aceptados' es lo que el diseño garantiza aun si la IA se equivoca (guardrails): un malicioso nunca se entrega y un legítimo nunca se bloquea. Si una hipótesis falla, se registra en la evidencia; no se ajusta este archivo para que pase sin documentar por qué cambió.",
+  "_version": 1,
+  "muestras": [
+    {
+      "archivo": "samples/legitimo.json",
+      "canal": "email",
+      "verdad": "LEGITIMO",
+      "veredicto_esperado": "FALSO_POSITIVO",
+      "veredictos_aceptados": ["FALSO_POSITIVO", "ESCALAR"],
+      "reglas_duras_requeridas": ["interno_autenticado_limpio"],
+      "agente1_aceptadas": ["IDENTIDAD_VERIFICADA"],
+      "fundamento": "Boletín interno desde 179.51.212.118 recibido por mx4.ejercito.mil.ar. El Agente 1 recalcula SPF contra el DNS público y lo verifica; ninguna regla dura de ataque.",
+      "depende_de": ["DNS público: SPF de ejercito.mil.ar autoriza 179.51.212.118 y su MX es mx4.ejercito.mil.ar", "ORIGENES_CONFIABLES incluye json_estructurado (perfil demo)"]
+    },
+    {
+      "archivo": "samples/phishing_credenciales.json",
+      "canal": "email",
+      "verdad": "MALICIOSO",
+      "veredicto_esperado": "VERDADERO_POSITIVO",
+      "veredictos_aceptados": ["VERDADERO_POSITIVO"],
+      "reglas_duras_requeridas": ["remitente_inexistente"],
+      "agente1_aceptadas": ["NO_VERIFICABLE", "SUPLANTACION_CONFIRMADA"],
+      "fundamento": "Lookalike ejercito-mil.ar (no registrado) con Reply-To gmail pidiendo credenciales. Regla dura: la IA no puede degradarlo.",
+      "depende_de": ["DNS público: ejercito-mil.ar no existe (NXDOMAIN)"]
+    },
+    {
+      "archivo": "samples/phishing_adjunto_malware.json",
+      "canal": "email",
+      "verdad": "MALICIOSO",
+      "veredicto_esperado": "VERDADERO_POSITIVO",
+      "veredictos_aceptados": ["VERDADERO_POSITIVO"],
+      "reglas_duras_requeridas": ["adjunto_ejecutable"],
+      "agente1_aceptadas": ["NO_VERIFICABLE", "SUPLANTACION_CONFIRMADA"],
+      "fundamento": "Liquidación de haberes con adjunto .pdf.exe desde un dominio ajeno. La regla dura sale del contenido, no de servicios externos.",
+      "depende_de": []
+    },
+    {
+      "archivo": "samples/phishing_reembolso.eml",
+      "canal": "email",
+      "verdad": "MALICIOSO",
+      "veredicto_esperado": "VERDADERO_POSITIVO",
+      "veredictos_aceptados": ["VERDADERO_POSITIVO"],
+      "reglas_duras_requeridas": ["adjunto_ejecutable"],
+      "agente1_aceptadas": ["NO_VERIFICABLE", "SUPLANTACION_CONFIRMADA"],
+      "fundamento": ".eml crudo (parser MIME propio) que suplanta a Mercado Pago con adjunto ejecutable; el Agente 1 recibe el .eml completo.",
+      "depende_de": []
+    },
+    {
+      "archivo": "samples/sms_banco_twilio.json",
+      "canal": "sms",
+      "verdad": "MALICIOSO",
+      "veredicto_esperado": "VERDADERO_POSITIVO",
+      "veredictos_aceptados": ["VERDADERO_POSITIVO", "ESCALAR"],
+      "reglas_duras_requeridas": [],
+      "agente1_aceptadas": ["NO_APLICA"],
+      "fundamento": "Smishing con remitente alfanumérico (formato Twilio) y enlace de captura. Sin regla dura: si la IA lo rebaja con score >= 55, el guardrail escala; nunca se entrega.",
+      "depende_de": []
+    },
+    {
+      "archivo": "samples/whatsapp_paquete_retenido.json",
+      "canal": "whatsapp",
+      "verdad": "MALICIOSO",
+      "veredicto_esperado": "VERDADERO_POSITIVO",
+      "veredictos_aceptados": ["VERDADERO_POSITIVO", "ESCALAR"],
+      "reglas_duras_requeridas": [],
+      "agente1_aceptadas": ["NO_APLICA"],
+      "fundamento": "Estafa de paquete retenido con perfil que imita a Correo Argentino y enlace de pago. Mismo guardrail que el SMS.",
+      "depende_de": []
+    },
+    {
+      "archivo": "samples/whatsapp_secuestro_cuenta.json",
+      "canal": "whatsapp",
+      "verdad": "MALICIOSO",
+      "veredicto_esperado": "VERDADERO_POSITIVO",
+      "veredictos_aceptados": ["VERDADERO_POSITIVO"],
+      "reglas_duras_requeridas": ["secuestro_de_cuenta"],
+      "agente1_aceptadas": ["NO_APLICA"],
+      "fundamento": "Pedido de código de verificación desde número extranjero (formato Meta Cloud API). Regla dura secuestro_de_cuenta.",
+      "depende_de": []
+    },
+    {
+      "archivo": "samples/whatsapp_legitimo.json",
+      "canal": "whatsapp",
+      "verdad": "LEGITIMO",
+      "veredicto_esperado": "FALSO_POSITIVO",
+      "veredictos_aceptados": ["FALSO_POSITIVO", "ESCALAR"],
+      "reglas_duras_requeridas": [],
+      "agente1_aceptadas": ["NO_APLICA"],
+      "fundamento": "Mensaje operativo de un número argentino sin enlaces ni pedidos. Sin evidencia no se bloquea.",
+      "depende_de": []
+    }
+  ]
+}
